@@ -1,0 +1,92 @@
+/* Payment.css */
+
+body {
+    background-color: #f0f4f8; /* Light background for the body */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .payment-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for container */
+    border-radius: 8px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .payment-title {
+    text-align: center;
+    color: #2c3e50; /* Darker shade for titles */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  .student-details {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ecf0f1; /* Light gray background */
+    border-radius: 8px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .student-title {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #2980b9; /* Blue color for titles */
+  }
+  
+  .payment-form {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background for form */
+    border-radius: 8px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  input[type="number"]:focus,
+  select:focus {
+    border-color: #3498db; /* Focus border color */
+    outline: none; /* Remove outline */
+  }
+  
+  .submit-button {
+    background-color: #2980b9; /* Blue background for submit button */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+  }
+  
+  .submit-button:hover {
+    background-color: #217dbb; /* Darker blue on hover */
+  }
+  
+  .confirmation-message {
+    margin-top: 20px;
+    color: #28a745; /* Green color for success message */
+    font-size: 1.2em;
+    text-align: center;
+  }
+  

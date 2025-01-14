@@ -1,0 +1,67 @@
+/* Centering the entire result page */
+.result-page {
+    display: flex;                  /* Use flexbox for centering */
+    flex-direction: column;        /* Stack items vertically */
+    align-items: center;           /* Center items horizontally */
+    justify-content: center;       /* Center items vertically */
+    height: 100vh;                 /* Full viewport height */
+    padding: 20px;                 /* Padding around the content */
+    background-color: #f9f9f9;     /* Light background color */
+}
+
+/* Styling for student info box */
+.student-info {
+    background-color: #fff;        /* White background for student info */
+    padding: 15px;                 /* Padding inside the box */
+    border-radius: 8px;            /* Rounded corners */
+    margin-bottom: 20px;           /* Space below the box */
+    border: 1px solid #ddd;        /* Border around the student info */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    width: 100%;                   /* Full width */
+    max-width: 500px;              /* Maximum width */
+}
+
+/* Student info paragraph styles */
+.student-info p {
+    margin: 5px 0;                 /* Margin for paragraphs */
+    font-size: 16px;               /* Font size */
+}
+
+/* Styling for results table */
+.results-table {
+    width: 100%;                   /* Full width */
+    border-collapse: collapse;     /* Collapse borders */
+    margin-top: 20px;              /* Space above the table */
+    font-size: 1em;                /* Font size */
+    font-family: 'Arial', sans-serif; /* Font family */
+    max-width: 600px;              /* Maximum width */
+}
+
+/* Table header and cell styling */
+.results-table th,
+.results-table td {
+    padding: 12px 15px;            /* Padding for cells */
+    text-align: left;              /* Align text to the left */
+}
+
+/* Header styles */
+.results-table th {
+    background-color: #4CAF50;     /* Green background for header */
+    color: white;                  /* White text color */
+    border-bottom: 2px solid #ddd; /* Border under header */
+}
+
+/* Table row styling */
+.results-table tr {
+    border-bottom: 1px solid #ddd; /* Bottom border for rows */
+}
+
+/* Hover effect for rows */
+.results-table tr:hover {
+    background-color: #f1f1f1;      /* Highlight on hover */
+}
+
+/* Cell text color */
+.results-table td {
+    color: #555;                    /* Darker text for readability */
+}

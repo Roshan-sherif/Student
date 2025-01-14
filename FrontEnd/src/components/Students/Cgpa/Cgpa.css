@@ -1,0 +1,83 @@
+/* App.css */
+.cgpa-calculator-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* White background for contrast */
+  }
+  
+  .cgpa-calculator-title {
+    text-align: center;
+    color: #333333; /* Dark text for better readability */
+    margin-bottom: 20px;
+  }
+  
+  .cgpa-selection-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .cgpa-dropdown {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .cgpa-subjects-title {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 10px;
+  }
+  
+  .cgpa-subjects-container {
+    margin-bottom: 20px;
+  }
+  
+  .cgpa-subject-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eeeeee; /* Divider for subjects */
+  }
+  
+  .cgpa-grade-dropdown {
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .cgpa-calculate-button {
+    display: block;
+    width: 100%;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .cgpa-calculate-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
+  .cgpa-result-title {
+    text-align: center;
+    color: #333333;
+    margin-top: 20px;
+  }
+  

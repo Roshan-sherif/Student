@@ -1,0 +1,71 @@
+.attendance-card {
+  width: 100%; /* Set width to 100% for responsiveness */
+  max-width: 550px; /* Limit the max width to prevent it from getting too large */
+  height: 250px; /* Adjust height as needed */
+  background-color: #ffffff; /* Background color for the card */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+  display: flex;
+  align-items: center; /* Center items vertically */
+  padding: 20px;
+}
+
+.content-wrapper {
+  justify-content: center; /* Center content */
+  width: 100%; /* Full width */
+}
+
+.circle-container {
+  position: relative; /* Position relative for centering the text */
+  margin-right: 20px; /* Space between the circle and text */
+}
+
+.progress-circle {
+  transform: rotate(-90deg); /* Rotate to start from the top */
+}
+
+.percentage {
+  position: absolute; /* Position absolutely to center text */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center the text */
+  font-size: 18px; /* Font size for percentage */
+  font-weight: bold;
+  color: #4caf50; /* Green color for percentage */
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column; /* Stack title and description */
+  justify-content: center; /* Center text vertically */
+}
+
+.title {
+  margin: 0; /* No margin for title */
+  font-size: 20px; /* Font size for title */
+}
+
+.description {
+  font-size: 14px; /* Smaller font size for description */
+  color: #666; /* Gray color for description */
+}
+
+/* Media Query for responsiveness */
+@media (max-width: 768px) {
+  .attendance-card {
+    width: 90%; /* Set width to 90% for tablets and smaller screens */
+    height: 200px; /* Adjust height for smaller screens */
+  }
+
+  .percentage {
+    font-size: 16px; /* Adjust percentage font size */
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,55 @@
+.navbar {
+    background-color: #2c2f3b;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1001; /* Ensure navbar is above the sidebar */
+  display: flex;
+  align-items: center;
+  
+  }
+  
+  
+  .navbar-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-button {
+    margin-right: 20px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
+    position: fixed; /* Fix the button in place */
+    top: 10px;
+    left: 20px; /* Place the button near the left of the screen */
+    z-index: 1001; /* Ensure the button is above the sidebar */
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+  }
+  
+  .logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .logo h2 {
+    margin: 0;
+  }
+  @media (max-width: 480px) {
+    .menu-button {
+      display: none;
+  }
+  
+  }
+  

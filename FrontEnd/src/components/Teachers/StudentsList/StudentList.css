@@ -1,0 +1,114 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Table Container */
+  .table-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .table-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Add Student Button */
+  .add-student-button {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+  
+  .add-student-button button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-student-button button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Table Styling */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .styled-table th,
+  .styled-table td {
+    padding: 15px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .styled-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .styled-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .styled-table .row-arrears {
+    background-color: #ffebe8; /* Light red for arrears */
+  }
+  
+  .styled-table .actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .styled-table .edit-btn,
+  .styled-table .delete-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .styled-table .edit-btn {
+    background-color: #ffc107;
+    color: #fff;
+  }
+  
+  .styled-table .edit-btn:hover {
+    background-color: #e0a800;
+  }
+  
+  .styled-table .delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .styled-table .delete-btn:hover {
+    background-color: #c82333;
+  }
+  

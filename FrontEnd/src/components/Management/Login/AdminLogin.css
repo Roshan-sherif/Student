@@ -1,0 +1,71 @@
+/* Scoped styles for Teacher Login Page */
+.teacher-login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.teacher-login-header {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #007BFF;
+    font-weight: 700;
+}
+
+.teacher-login-form .teacher-form-group {
+    margin-bottom: 20px;
+}
+
+.teacher-login-form .teacher-form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.teacher-login-form .teacher-form-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.teacher-login-form .teacher-form-group input:focus {
+    border-color: #007BFF;
+    outline: none;
+    background-color: #fff;
+}
+
+.teacher-login-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.teacher-login-btn:hover {
+    background-color: #0056b3;
+}
+
+.teacher-login-form p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #777;
+}

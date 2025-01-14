@@ -1,0 +1,78 @@
+/* Main container for the mark entry section */
+.mark-entry-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Title styling */
+  .title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Table styling */
+  .marks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  .marks-table th,
+  .marks-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  /* Header cell styling */
+  .marks-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  /* Styling for input fields (marks) */
+  .mark-input {
+    padding: 10px;
+    font-size: 16px;
+    width: 100px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s, background-color 0.3s;
+  }
+  
+  /* Focus effect for input fields */
+  .mark-input:focus {
+    border-color: #3f51b5;
+    background-color: #e3f2fd;
+  }
+  
+  /* Button styling */
+  .save-button {
+    padding: 15px 25px;
+    font-size: 18px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .save-button:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+  }
+  

@@ -1,0 +1,49 @@
+.sidebar {
+  width: 250px; /* Sidebar width */
+  background-color: #2c2f3b;
+  color: white;
+  height: 100vh;
+  transition: transform 0.3s ease; /* Smooth open/close transition */
+  overflow: hidden;
+  position: fixed; /* Fix sidebar to the left of the screen */
+  left: 0; /* Align sidebar to the left */
+  top: 0;
+  z-index: 1000;
+}
+
+.sidebar.closed {
+  transform: translateX(-100%); /* Move sidebar completely out of view when closed */
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Bring sidebar back into view when open */
+}
+
+.profile-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  width: 100px;
+  border-radius: 50%;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav li {
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.avatar {
+  max-width: 350px;
+}
+.sidebarTexts {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Use the default text color */
+  cursor: default; /* Change the cursor to default */
+}
