@@ -1,6 +1,6 @@
 // Importing React
 import React, { useState } from "react";
-
+import axios from 'axios'
 // Importing CSS for Teacher's login
 import "./AdminLogin.css";
 
@@ -11,10 +11,20 @@ const AdminLoginPage = () => {
     console.log(userId)
 const handleSubmit=async(e)=>{
     e.preventDefault();
-    
+    console.log('helo')
     const loginData={
+        
+    }
+    try{
+    const response=await axios.post(`${process.env.REACT_APP_API_URL}/admin/login`, {
         userId,
-        password,
+        password
+    })
+    localStorage.setItem('token', response.data.token);
+    onLogin(response.data.token);
+
+    }catch(err){
+        console.log('Invalid username or password')
     }
 } 
     return (
