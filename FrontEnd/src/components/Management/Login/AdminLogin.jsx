@@ -13,17 +13,18 @@ const handleSubmit=async(e)=>{
     e.preventDefault();
     console.log('helo')
     const loginData={
-        
+        userId, password
     }
     try{
-    const response=await axios.post(`${process.env.REACT_APP_API_URL}/admin/login`, {
-        userId,
-        password
-    })
-    localStorage.setItem('token', response.data.token);
-    onLogin(response.data.token);
-
-    }catch(err){
+        fetch('http://localhost:5000/admin/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer <your-token>' // Add your token here
+            },
+            body: JSON.stringify({loginData  })
+          });
+              }catch(err){
         console.log('Invalid username or password')
     }
 } 
