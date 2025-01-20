@@ -13,12 +13,6 @@ const ManagementSidebar = ({ isOpen }) => {
 <nav>
         <ul>
           <Link className='sidebarTexts' to='/'><li>HOME</li></Link>
-          <Link className='sidebarTexts' to='/PROGRESS'><li>PROGRESS</li></Link>
-          <Link className='sidebarTexts' to='/RESULT'><li>RESULT</li></Link>
-          <Link className='sidebarTexts' to='/CGPA'><li>CGPA</li></Link>
-          <Link className='sidebarTexts' to='/FEES'><li>PAY FEE</li></Link> 
-          <Link className='sidebarTexts' to='/EVENTS'><li>EVENTS</li></Link>
-          <Link className='sidebarTexts' to='/PROFILE'><li>PROFILE</li></Link>
         </ul>
       </nav>
 
@@ -29,7 +23,3 @@ const ManagementSidebar = ({ isOpen }) => {
 };
 
 export default ManagementSidebar;
-// <div className="profile-section">
-//         <img src="/profile-pic.png" alt="Profile" className="profile-pic" />
-//         <h3>NAME</h3>
-//       </div>

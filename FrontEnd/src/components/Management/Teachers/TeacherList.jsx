@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import './TeacherList.css'; // Import the CSS file
-
-// Sample data of teachers
+import { Link } from 'react-router-dom'; 
+import './TeacherList.css'; 
 const teacherData = [
   { register: "T001", name: "Dr. Emily Carter", Dep: "CSE", gender: "Female", className: "Class A", subClass: "Section 1", isClassTeacher: "Yes" },
   { register: "T002", name: "Mr. John Wilson", Dep: "IT", gender: "Male", className: "Class B", subClass: "Section 2", isClassTeacher: "No" },
@@ -15,14 +13,12 @@ const TeacherListManagement = () => {
     <div className="table-container">
       <h2 className="table-title">Teacher Portal - Teacher Data</h2>
 
-      {/* Add Teacher Button (Navigates to the AddTeacherPage) */}
       <div className="add-teacher-button">
         <Link to="/management/add-teacher">
           <button>Add Teacher</button>
         </Link>
       </div>
 
-      {/* Teacher table */}
       <table className="styled-table">
         <thead>
           <tr>

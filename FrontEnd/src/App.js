@@ -58,10 +58,9 @@ function App() {
         };
     }, []);
 
-    // Determine if the current route is for teachers
     const isTeacherRoute = location.pathname.startsWith('/teachers');
     const isLogin = location.pathname.startsWith('/login');
-    const isManagement = location.pathname.startsWith('/management');
+    const isManagement = location.pathname.startsWith('/admin');
 
 
     return (
@@ -93,7 +92,7 @@ function App() {
                             <Routes>
                             <Route path="/login/students" element={<StudentsLogin />} />
                             <Route path="/login/teachers" element={<LoginPageTeachers/>} />
-                            <Route path="/login/management" element={<AdminLoginPage/>} />
+                            <Route path="/login/admin" element={<AdminLoginPage/>} />
 
                             </Routes>
 
@@ -107,13 +106,13 @@ function App() {
                         <ManagementSidebar isOpen={sidebarOpen} />
                         <div className={`main-content ${sidebarOpen ? 'shift-right' : 'full-width'}`}>
                             <Routes>
-                            <Route path="/management" element={<ManagementCard />} />
-                            <Route path="/management/Students" element={<StudentListManagement />} />
-                            <Route path="/management/add-student" element={<AddStudentFormMangement/>} />
-                            <Route path="/management/Teacher" element={<TeacherListManagement/>}/>
-                            <Route path="/management/add-teacher" element={<AddTeacher/>} />
-                            <Route path="/management/Class" element={<ClassManagement/>}/>
-                            <Route path="/management/add-class" element={<AddClass/>} />
+                            <Route path="/admin" element={<ManagementCard />} />
+                            <Route path="/admin/Students" element={<StudentListManagement />} />
+                            <Route path="/admin/add-student" element={<AddStudentFormMangement/>} />
+                            <Route path="/admin/Teacher" element={<TeacherListManagement/>}/>
+                            <Route path="/admin/add-teacher" element={<AddTeacher/>} />
+                            <Route path="/admin/Class" element={<ClassManagement/>}/>
+                            <Route path="/admin/add-class" element={<AddClass/>} />
 
                    </Routes>
                         </div>

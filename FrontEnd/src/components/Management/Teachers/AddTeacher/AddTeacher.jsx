@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './AddTeacher.css'; // Reuse the existing CSS
+import './AddTeacher.css';
 
 const AddTeacher = () => {
   const [teacher, setTeacher] = useState({
@@ -13,13 +13,11 @@ const AddTeacher = () => {
     class: '',
   });
   
-  const [classes, setClasses] = useState([]); // Store the fetched classes
-
-  // Fetch classes from the database
+  const [classes, setClasses] = useState([]); 
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get('/api/classes'); // Replace with your API endpoint
+        const response = await axios.get('/api/classes'); 
         setClasses(response.data);
       } catch (error) {
         console.error('Error fetching classes:', error);
@@ -40,7 +38,6 @@ const AddTeacher = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Teacher Data Submitted:', teacher);
-    // Implement your logic for handling form submission (e.g., sending to backend)
     alert('Teacher added successfully!');
     setTeacher({
       name: '',
@@ -57,7 +54,6 @@ const AddTeacher = () => {
     <div className="table-container">
       <h2 className="table-title">Add Teacher</h2>
       <form className="styled-form" onSubmit={handleSubmit}>
-        {/* Name */}
         <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input
@@ -70,7 +66,6 @@ const AddTeacher = () => {
           />
         </div>
 
-        {/* Register Number */}
         <div className="form-group">
           <label htmlFor="register">Register Number:</label>
           <input
@@ -83,7 +78,6 @@ const AddTeacher = () => {
           />
         </div>
 
-        {/* Gender */}
         <div className="form-group">
           <label htmlFor="gender">Gender:</label>
           <select
@@ -98,8 +92,6 @@ const AddTeacher = () => {
             <option value="Female">Female</option>
           </select>
         </div>
-
-        {/* Department */}
         <div className="form-group">
           <label htmlFor="department">Department:</label>
           <input
@@ -112,7 +104,6 @@ const AddTeacher = () => {
           />
         </div>
 
-        {/* Subject */}
         <div className="form-group">
           <label htmlFor="subject">Subject:</label>
           <input
@@ -125,7 +116,6 @@ const AddTeacher = () => {
           />
         </div>
 
-        {/* Is Class Teacher */}
         <div className="form-group checkbox-group">
           <label>
             <input
@@ -138,7 +128,6 @@ const AddTeacher = () => {
           </label>
         </div>
 
-        {/* Select Class (Visible only if isClassTeacher is true) */}
         {teacher.isClassTeacher && (
           <div className="form-group">
             <label htmlFor="class">Class:</label>
@@ -159,7 +148,6 @@ const AddTeacher = () => {
           </div>
         )}
 
-        {/* Submit Button */}
         <div className="form-group">
           <button type="submit" className="add-button">Add Teacher</button>
         </div>

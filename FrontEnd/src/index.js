@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import ReactDOM from 'react-dom/client'; // Import ReactDOM
-import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom'; 
 import App from './App';
 import './index.css';
 
@@ -10,7 +10,7 @@ const rootElement = document.getElementById('root');
 
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
-  root.render( // Use root.render() to render the app
+  root.render( 
     <BrowserRouter>
       <App />
     </BrowserRouter>

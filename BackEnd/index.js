@@ -8,11 +8,20 @@ const cookieParser = require('cookie-parser');
 dotenv.config();
 connectDB();
 require('dotenv').config();
+const corsOptions = {
+    origin: 'http://localhost:3000', // Allow requests only from localhost:3000
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    credentials: true, // Allow cookies/credentials
+};
+
+// Apply CORS middleware
+
 
 const app = express();
-app.use(cors())
 app.use(express.json()); 
+app.use(cors(corsOptions));
 app.use(cookieParser())
-app.use('/admin',adminRoutes)
+app.use('/api/admin',adminRoutes)
 
 app.listen(5000, () => console.log('Server running on port 5000'));

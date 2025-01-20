@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Cards.css'; // Import the CSS file
 
-// TitleCard component
+import './Cards.css'; 
+import axios from 'axios';
+
+
 const TitleCard = ({ title, text, imageUrl }) => {
     return (
         <div className="title-card">
@@ -16,13 +18,41 @@ const TitleCard = ({ title, text, imageUrl }) => {
 const ResultOnClick=()=>{
 
 }
-// Result component
 const FeatureCard = () => {
-
+const [DashboardData,setDashboardData]=useState(null)
     const navigate =useNavigate()
+    
+useEffect(()=>{
+   const fetchDashboardData=async()=>{
+    const token=localStorage.getItem("token")
+    if(!token){
+       return navigate('/login/admin')
+    }else{
+        try {
+      const response= await fetch('http://localhost:5000/api/admin/', {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${token}`,
+          }
+
+      });
+
+      console.log(response)
+      setDashboardData(response.data)
+
+        } 
+        
+        catch (error) {
+            console.error(error)
+        }
+    }
+    }
+    fetchDashboardData(); 
+
+},[navigate])
 
     const ResultOnClick=(title)=>{
-        navigate(`/management/${title}`)
+        navigate(`/admin/${title}`)
     }
     
     const cards = [

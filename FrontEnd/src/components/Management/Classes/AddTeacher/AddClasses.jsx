@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const AddClass = () => {
-  // Hardcoded data for departments, regulation years, and teachers
   const departments = ["CSE", "ECE", "EEE", "Mechanical", "Civil"];
   const regulationYears = [2020, 2021, 2022, 2023];
   const teachers = [
@@ -11,7 +10,7 @@ const AddClass = () => {
   ];
 
   const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
-  const years = Array.from({ length: 20 }, (_, i) => 2000 + i); // Generates years from 2000 to 2019
+  const years = Array.from({ length: 20 }, (_, i) => 2000 + i); 
 
   const [formData, setFormData] = useState({
     department: "",
@@ -51,7 +50,6 @@ const AddClass = () => {
     <div className="add-class-container">
       <h2>Add Class</h2>
       <form onSubmit={handleSubmit}>
-        {/* Department Dropdown */}
         <div>
           <label>Department:</label>
           <select
@@ -68,7 +66,6 @@ const AddClass = () => {
           </select>
         </div>
 
-        {/* Regulation Year Dropdown */}
         <div>
           <label>Regulation Year:</label>
           <select
@@ -85,7 +82,6 @@ const AddClass = () => {
           </select>
         </div>
 
-        {/* Start Year Dropdown */}
         <div>
           <label>Start Year:</label>
           <select
@@ -102,7 +98,6 @@ const AddClass = () => {
           </select>
         </div>
 
-        {/* End Year Dropdown */}
         <div>
           <label>End Year:</label>
           <select
@@ -119,7 +114,6 @@ const AddClass = () => {
           </select>
         </div>
 
-        {/* Semester Dropdown */}
         <div>
           <label>Semester:</label>
           <select

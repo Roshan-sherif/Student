@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Cgpa.css';
 
-// Grade to point mapping
 const gradePoints = {
   'O': 10,
   'A+': 9,
@@ -12,7 +11,6 @@ const gradePoints = {
   'RA': 0
 };
 
-// Subjects and their credit points for each department and semester
 const departmentSubjects = {
   'CSE': {
     'sem1': {
@@ -37,16 +35,12 @@ const departmentSubjects = {
       'Engineering Practices Lab': 2,
       'Programming in C Lab': 2,
     },
-    // Additional semesters can be added here
   },
   'ECE': {
-    // Add subjects for ECE department
   },
   'MECH': {
-    // Add subjects for MECH department
   },
   'AIDS': {
-    // Add subjects for AIDS department
   },
 };
 
@@ -71,7 +65,7 @@ function CGPACalculator() {
     let totalCredits = 0;
 
     for (const [subject, credits] of Object.entries(subjects)) {
-      const grade = grades[subject] || 'RA'; // Default to RA if no grade
+      const grade = grades[subject] || 'RA'; 
       if (gradePoints[grade] !== undefined) {
         totalPoints += gradePoints[grade] * credits;
         totalCredits += credits;

@@ -1,13 +1,12 @@
-// Importing React
 import React, { useState } from "react";
 import axios from 'axios'
-// Importing CSS for Teacher's login
 import "./AdminLogin.css";
+import { useNavigate } from 'react-router-dom'; 
 
-// Teachers Login Page Component
 const AdminLoginPage = () => {
     const [userId,setUserId]=useState('')
     const [password,setPassword]=useState('')
+    const navigate=useNavigate()
     console.log(userId)
 const handleSubmit=async(e)=>{
     e.preventDefault();
@@ -16,14 +15,23 @@ const handleSubmit=async(e)=>{
         userId, password
     }
     try{
-        fetch('http://localhost:5000/admin/login', {
+      const response= await fetch('http://localhost:5000/api/admin/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Bearer <your-token>' // Add your token here
             },
-            body: JSON.stringify({loginData  })
+            
+            body: JSON.stringify({loginData}),
+            credentials: 'include', 
+
           });
+          const data =await response.json()
+          if(data.success){
+            localStorage.setItem("token",data.token)
+            navigate(data.redirect)
+          }else{
+
+              }
               }catch(err){
         console.log('Invalid username or password')
     }

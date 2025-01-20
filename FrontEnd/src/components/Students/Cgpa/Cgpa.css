@@ -5,12 +5,12 @@
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff; /* White background for contrast */
+    background-color: #ffffff; 
   }
   
   .cgpa-calculator-title {
     text-align: center;
-    color: #333333; /* Dark text for better readability */
+    color: #333333; 
     margin-bottom: 20px;
   }
   
