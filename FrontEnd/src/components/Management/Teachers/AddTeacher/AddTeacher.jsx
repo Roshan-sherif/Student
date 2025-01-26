@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddTeacher.css';
+import { useNavigate } from 'react-router-dom';
 
 const AddTeacher = () => {
   const [teacher, setTeacher] = useState({
@@ -9,23 +10,45 @@ const AddTeacher = () => {
     gender: '',
     department: '',
     subject: '',
-    isClassTeacher: false,
-    class: '',
   });
-  
+  const navigate =useNavigate()
   const [classes, setClasses] = useState([]); 
-  useEffect(() => {
-    const fetchClasses = async () => {
-      try {
-        const response = await axios.get('/api/classes'); 
-        setClasses(response.data);
-      } catch (error) {
-        console.error('Error fetching classes:', error);
-      }
-    };
+  const [DashboardData, setDashboardData] =useState()
+useEffect(()=>{
+   const fetchDashboardData=async()=>{
+    const token=localStorage.getItem("token")
+    console.log(token)
+    if(!token){
+       return navigate('/login/admin')
+    }else{
+        try {
+      const response= await fetch('http://localhost:5000/api/admin/authverify', {
+        method: 'GET',
+        headers: {
+            Authorization: `${token}`,
+          }
 
-    fetchClasses();
-  }, []);
+      })
+      const data = await response.json()
+      if(data.status){
+        navigate(`/admin/add-teacher`)
+        setDashboardData(response.data)
+      }else{
+        navigate(`/login/admin`)
+        setDashboardData(response.data)
+      }
+  
+        } 
+        
+        catch (error) {
+            navigate('/login/admin')
+            console.error(error)
+        }
+    }
+    }
+    fetchDashboardData(); 
+
+},[navigate])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -35,19 +58,30 @@ const AddTeacher = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Teacher Data Submitted:', teacher);
-    alert('Teacher added successfully!');
     setTeacher({
       name: '',
       register: '',
       gender: '',
       department: '',
       subject: '',
-      isClassTeacher: false,
-      class: '',
     });
+  
+    try{
+      const responseAddTeacher= await axios.post('http://localhost:5000/api/admin/add-teacher',teacher,{
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+if(responseAddTeacher.status){
+  alert('Successfully Added the Teacher')
+}else{
+  console.log('somthing went wrong')
+}
+    }catch(error){
+      console.log(error)
+    }
   };
 
   return (

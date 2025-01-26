@@ -26,7 +26,7 @@ useEffect(()=>{
        return navigate('/login/admin')
     }else{
         try {
-      const response= await fetch('http://localhost:5000/api/admin/', {
+      const response= await fetch('http://localhost:5000/api/admin/authverify', {
         method: 'GET',
         headers: {
             Authorization: `${token}`,

@@ -9,7 +9,6 @@ const jwtSecret= process.env.JWT_KEY
 
   try {
     const decoded = jwt.verify(token, `${jwtSecret}`,);
-    console.log(decoded)
     req.user = decoded;
 
     next(); 

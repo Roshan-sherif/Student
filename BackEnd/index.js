@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 
 dotenv.config();
 connectDB();
-console.log(process.env.JWT_KEY)
 const corsOptions = {
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 

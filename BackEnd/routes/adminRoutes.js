@@ -4,8 +4,6 @@ const adminController = require('../controllers/adminController');
 const checkAuth =require('../middleware/authMiddleware');
 const { redirect } = require('react-router-dom');
 router.post('/login', async(req,res)=>{
-
-    console.log('helo')
     const LoginData = req.body.loginData
 
 try{
@@ -19,7 +17,6 @@ try{
     });
     res.json(responce)
     }else{
-        console.log(responce)
     return res.status(401).json(responce);
 
    }
@@ -30,14 +27,21 @@ try{
 
 }
 })
-router.get('/',checkAuth, (req,res)=>{
-    console.log(req.user.role)
+router.get('/authverify',checkAuth, (req,res)=>{
 if(req.user.role==='admin'){
 res.json({status: true, redirect:'/admin/' })
 }else{
     res.json({status: false, redirect:'/login/admin' })
 
 }
+})
+router.post('/add-teacher',(req,res)=>{
+    adminController.addTeacher(req.body).then(()=>{
+        res.json({status: true})
+    }).catch(()=>{
+        res.json({status: false})
+    })
+
 })
 
 module.exports = router;
