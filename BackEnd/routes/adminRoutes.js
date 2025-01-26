@@ -1,8 +1,11 @@
 const express =require('express')
 const router = express.Router();
 const adminController = require('../controllers/adminController');
-const checkAuth =require('../middleware/authMiddleware')
+const checkAuth =require('../middleware/authMiddleware');
+const { redirect } = require('react-router-dom');
 router.post('/login', async(req,res)=>{
+
+    console.log('helo')
     const LoginData = req.body.loginData
 
 try{
@@ -15,8 +18,9 @@ try{
         sameSite: 'Strict',
     });
     res.json(responce)
-}else{
-    return res.status(401).json(response);
+    }else{
+        console.log(responce)
+    return res.status(401).json(responce);
 
    }
 
@@ -27,8 +31,11 @@ try{
 }
 })
 router.get('/',checkAuth, (req,res)=>{
-    console.log("checkAuth")
-if(checkAuth.user==='admin'){
+    console.log(req.user.role)
+if(req.user.role==='admin'){
+res.json({status: true, redirect:'/admin/' })
+}else{
+    res.json({status: false, redirect:'/login/admin' })
 
 }
 })

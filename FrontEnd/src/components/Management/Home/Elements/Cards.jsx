@@ -15,9 +15,6 @@ const TitleCard = ({ title, text, imageUrl }) => {
     );
 };
 
-const ResultOnClick=()=>{
-
-}
 const FeatureCard = () => {
 const [DashboardData,setDashboardData]=useState(null)
     const navigate =useNavigate()
@@ -30,19 +27,25 @@ useEffect(()=>{
     }else{
         try {
       const response= await fetch('http://localhost:5000/api/admin/', {
-        method: 'POST',
+        method: 'GET',
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
           }
 
-      });
-
-      console.log(response)
-      setDashboardData(response.data)
-
+      })
+      const data = await response.json()
+      if(data.status){
+        navigate(`${data.redirect}`)
+        setDashboardData(response.data)
+      }else{
+        navigate(`/login/admin`)
+        setDashboardData(response.data)
+      }
+  
         } 
         
         catch (error) {
+            navigate('/login/admin')
             console.error(error)
         }
     }

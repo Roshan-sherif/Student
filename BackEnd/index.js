@@ -7,15 +7,14 @@ const cookieParser = require('cookie-parser');
 
 dotenv.config();
 connectDB();
-require('dotenv').config();
+console.log(process.env.JWT_KEY)
 const corsOptions = {
-    origin: 'http://localhost:3000', // Allow requests only from localhost:3000
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-    credentials: true, // Allow cookies/credentials
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    allowedHeaders: ['Content-Type', 'Authorization'], 
+    credentials: true,
 };
 
-// Apply CORS middleware
 
 
 const app = express();
