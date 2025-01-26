@@ -76,7 +76,9 @@ const TeacherListManagement = () => {
               <td>{teacher.department}</td>
               <td>{teacher.gender}</td>
               <td>
-                <button className="edit-btn">Edit</button>
+              <Link to={`/admin/edit-teacher/${teacher._id}`}>
+                  <button className="edit-btn">Edit</button>
+                </Link>
                 <button className="delete-btn">Delete</button>
               </td>
             </tr>

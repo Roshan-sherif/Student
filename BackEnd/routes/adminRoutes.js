@@ -50,4 +50,17 @@ router.get('/teacher-view',(req,res)=>{
         console.log('somthing wrong')
     })
 })
+router.get('/get-teacher/:id',(req,res)=>{
+    adminController.getTeacherforEdit(req.params.id).then((teacherData)=>{
+        res.json({status:true, teacherData})
+    }).catch(()=>{
+        res.json({status:false, teacherData})
+
+    })
+})
+router.post('/edit-teacher/:id',(req,res)=>{
+adminController.editTeacher(req.body,req.body._id).then(()=>{
+    res.json({status:true})
+})
+})
 module.exports = router;

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Teacher = require('../models/Teacher');
+const { get } = require('mongoose');
 
 
 module.exports = {
@@ -55,6 +56,18 @@ module.exports = {
             const viewTeacher=await Teacher.find()
 resolve(viewTeacher)        
 })
+    },
+    getTeacherforEdit:(id)=>{
+        return new Promise(async(resolve,reject)=>{
+            const getTeacherDetails=await Teacher.findById(id)
+resolve(getTeacherDetails)
+        })
+    },
+    editTeacher:(teacherData,id)=>{
+        return new Promise(async(resolve,reject)=>{
+            const teacherEdit =await Teacher.findByIdAndUpdate(id,teacherData,{new:true})
+            resolve(teacherEdit)
+        })
     }
 
 };
