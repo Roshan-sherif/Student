@@ -94,14 +94,27 @@ const AddTeacher = () => {
         </div>
         <div className="form-group">
           <label htmlFor="department">Department:</label>
-          <input
+          <select
             type="text"
             id="department"
             name="department"
             value={teacher.department}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select Gender</option>
+            <option value="GENERAL">GENERAL</option>
+            <option value="CSE">CSE</option>
+            <option value="AIDS">AIDS</option>
+            <option value="CYBER SECURITY">CYBER SECURITY</option>
+            <option value="FOOD AND TECH">FOOD AND TECH</option>
+            <option value="AGRICULTURE">AGRICULTURE</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="MECH">MECH</option>
+            <option value="EEE">EEE</option>
+            <option value="ECE">ECE</option>
+            <option value="BIO TECH">BIO TECH</option>
+          </select>
         </div>
 
         <div className="form-group">
@@ -115,38 +128,6 @@ const AddTeacher = () => {
             required
           />
         </div>
-
-        <div className="form-group checkbox-group">
-          <label>
-            <input
-              type="checkbox"
-              name="isClassTeacher"
-              checked={teacher.isClassTeacher}
-              onChange={handleChange}
-            />
-            Is Class Teacher?
-          </label>
-        </div>
-
-        {teacher.isClassTeacher && (
-          <div className="form-group">
-            <label htmlFor="class">Class:</label>
-            <select
-              id="class"
-              name="class"
-              value={teacher.class}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Class</option>
-              {classes.map((cls) => (
-                <option key={cls.id} value={cls.id}>
-                  {cls.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
 
         <div className="form-group">
           <button type="submit" className="add-button">Add Teacher</button>

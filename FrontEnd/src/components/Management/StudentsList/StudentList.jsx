@@ -17,7 +17,7 @@ const StudentListManagement = () => {
 
       {/* Add Student Button (Navigates to the AddStudentPage) */}
       <div className="add-student-button">
-        <Link to="/management/add-student">
+        <Link to="/admin/add-student">
           <button>Add Student</button>
         </Link>
       </div>

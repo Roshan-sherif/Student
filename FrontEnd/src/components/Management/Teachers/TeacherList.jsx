@@ -14,7 +14,7 @@ const TeacherListManagement = () => {
       <h2 className="table-title">Teacher Portal - Teacher Data</h2>
 
       <div className="add-teacher-button">
-        <Link to="/management/add-teacher">
+        <Link to="/admin/add-teacher">
           <button>Add Teacher</button>
         </Link>
       </div>
