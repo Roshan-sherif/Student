@@ -77,7 +77,7 @@ useEffect(()=>{
 if(responseAddTeacher.status){
   alert('Successfully Added the Teacher')
 }else{
-  console.log('somthing went wrong')
+  alert('somthing went wrong')
 }
     }catch(error){
       console.log(error)

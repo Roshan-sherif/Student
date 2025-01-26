@@ -43,5 +43,11 @@ router.post('/add-teacher',(req,res)=>{
     })
 
 })
-
+router.get('/teacher-view',(req,res)=>{
+    adminController.getTeacher().then((teacherData)=>{
+        res.json({status: true, teacherData})
+    }).catch(()=>{
+        console.log('somthing wrong')
+    })
+})
 module.exports = router;
