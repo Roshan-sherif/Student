@@ -68,6 +68,12 @@ resolve(getTeacherDetails)
             const teacherEdit =await Teacher.findByIdAndUpdate(id,teacherData,{new:true})
             resolve(teacherEdit)
         })
+    },
+    dltTeacher:(teacherId)=>{
+        return new Promise(async(resolve,reject)=>{
+            const dlt=await Teacher.deleteOne({_id:teacherId})
+            resolve(dlt)
+        })
     }
 
 };

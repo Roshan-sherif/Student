@@ -63,4 +63,10 @@ adminController.editTeacher(req.body,req.body._id).then(()=>{
     res.json({status:true})
 })
 })
+router.post('/dlt-teacher/:id',(req,res)=>{
+    console.log(req.params)
+    adminController.dltTeacher(req.params.id).then(()=>{
+        res.json({status :true})
+    })
+})
 module.exports = router;

@@ -1,14 +1,25 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, redirect, useNavigate } from 'react-router-dom'; 
 import './TeacherList.css'; 
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 
 const TeacherListManagement = () => {
+
   const navigate=useNavigate()
   const [DashboardData,setDashboardData]=useState([])
   const [Teachers,setTeacher]=useState([])
+
+  const dltTeacher=async (id)=>{
+const dlt = await axios.post(`http://localhost:5000/api/admin/dlt-teacher/${id}`)
+console.log(dlt)
+if(dlt.data.status){
+  console.log('hello')
+navigate('/admin/teacher')
+}
+  }
+
   useEffect(()=>{
      const fetchDashboardData=async()=>{
       const token=localStorage.getItem("token")
@@ -79,7 +90,7 @@ const TeacherListManagement = () => {
               <Link to={`/admin/edit-teacher/${teacher._id}`}>
                   <button className="edit-btn">Edit</button>
                 </Link>
-                <button className="delete-btn">Delete</button>
+                <button className="delete-btn" onClick={()=>dltTeacher(teacher._id)}>Delete</button>
               </td>
             </tr>
           ))}
