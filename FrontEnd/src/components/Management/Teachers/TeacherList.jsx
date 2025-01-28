@@ -16,7 +16,7 @@ const dlt = await axios.post(`http://localhost:5000/api/admin/dlt-teacher/${id}`
 console.log(dlt)
 if(dlt.data.status){
   console.log('hello')
-navigate('/admin/teacher')
+  setTeacher((prevTeachers) => prevTeachers.filter((teacher) => teacher._id !== id));
 }
   }
 
