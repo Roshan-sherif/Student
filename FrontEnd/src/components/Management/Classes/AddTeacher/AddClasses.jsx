@@ -1,24 +1,40 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 const AddClass = () => {
+  const [teachers, setTeachers] = useState([]); // Initialize state as an empty array
   const departments = ["CSE", "ECE", "EEE", "Mechanical", "Civil"];
-  const regulationYears = [2020, 2021, 2022, 2023];
-  const teachers = [
-    { id: 1, name: "Mr. John" },
-    { id: 2, name: "Ms. Alice" },
-    { id: 3, name: "Dr. Smith" },
-  ];
-
+  const regulation = [2018,2021];
   const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
-  const years = Array.from({ length: 20 }, (_, i) => 2000 + i); 
+  const years = Array.from({ length: 20 }, (_, i) => 2019 + i); 
+
+  useEffect(() => {
+    const fetchTeacher = async () => {
+      try {
+        const response = await axios.post(
+          'http://localhost:5000/api/admin/classes-teacher-list'
+        );
+        console.log(response)
+        if (response.data.status && Array.isArray(response.data.teacher)) {
+          console.log('hello')
+          setTeachers(response.data.teacher);
+        } else {
+          console.error('Unexpected response format:', response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching teacher data:', error);
+      }
+    };
+    fetchTeacher();
+  }, []);
 
   const [formData, setFormData] = useState({
     department: "",
-    regulationYear: "",
+    regulation: "",
     startYear: "",
     endYear: "",
     semester: "",
-    classTeacher: "",
+    classTeacherId: "",
   });
 
   const handleChange = (e) => {
@@ -29,20 +45,16 @@ const AddClass = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    if (
-      formData.department &&
-      formData.regulationYear &&
-      formData.startYear &&
-      formData.endYear &&
-      formData.semester &&
-      formData.classTeacher
-    ) {
-      console.log("Class Added", formData);
-      alert("Class added successfully!");
-    } else {
-      alert("Please fill in all fields.");
+    try {
+      const response=await axios.post('http://localhost:5000/api/admin/classes-add',formData)
+      console.log(response)
+if(response.data.status){
+  alert('Class Succesfully Added')
+}
+    } catch (error) {
+      console.log(error)
     }
   };
 
@@ -69,12 +81,12 @@ const AddClass = () => {
         <div>
           <label>Regulation Year:</label>
           <select
-            name="regulationYear"
-            value={formData.regulationYear}
+            name="regulation"
+            value={formData.regulation}
             onChange={handleChange}
           >
             <option value="">Select Regulation Year</option>
-            {regulationYears.map((year, index) => (
+            {regulation.map((year, index) => (
               <option key={index} value={year}>
                 {year}
               </option>
@@ -130,17 +142,16 @@ const AddClass = () => {
           </select>
         </div>
 
-        {/* Class Teacher Dropdown */}
         <div>
           <label>Class Teacher:</label>
           <select
-            name="classTeacher"
-            value={formData.classTeacher}
+            name="classTeacherId"
+            value={formData.classTeacherId}
             onChange={handleChange}
           >
             <option value="">Select Class Teacher</option>
             {teachers.map((teacher) => (
-              <option key={teacher.id} value={teacher.name}>
+              <option key={teacher._id} value={teacher._id}>
                 {teacher.name}
               </option>
             ))}

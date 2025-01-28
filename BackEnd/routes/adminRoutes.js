@@ -69,4 +69,21 @@ router.post('/dlt-teacher/:id',(req,res)=>{
         res.json({status :true})
     })
 })
+
+// Clases routes
+router.post('/classes-teacher-list/',(req,res)=>{
+    console.log('hello')
+    adminController.getTeacherforAddClasses().then((teacher)=>{
+        console.log('hell')
+        res.json({status:true , teacher})
+    })
+})
+router.post('/classes-add',(req,res)=>{
+    console.log(req.body)
+    adminController.createClass(req.body).then(()=>{
+        res.json({status:true})
+    }).catch((error)=>{
+        res.json({status:false, error})
+    })
+})
 module.exports = router;

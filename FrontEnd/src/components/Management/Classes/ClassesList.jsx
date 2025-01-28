@@ -64,7 +64,7 @@ const ClassManagement = () => {
   return (
     <div className="class-management-container">
       <h2>Class Management</h2>
-        <Link to="/management/add-class">
+        <Link to="/admin/add-class">
           <button>Add Class</button>
         </Link>
       <table className="class-table">
@@ -94,6 +94,12 @@ const ClassManagement = () => {
                   onClick={() => handleEdit(cls.id)}
                 >
                   Edit
+                </button>
+                <button
+                  className="sem-btn"
+                  onClick={() => handleDelete(cls.id)}
+                >
+                  SEM+
                 </button>
                 <button
                   className="delete-btn"

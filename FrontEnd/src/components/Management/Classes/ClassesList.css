@@ -52,7 +52,8 @@ h2 {
 }
 
 .edit-btn,
-.delete-btn {
+.delete-btn,
+.sem-btn {
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
@@ -65,7 +66,11 @@ h2 {
   background-color: #ffc107;
   color: white;
 }
+.sem-btn{
+  background-color: #077bff;
+  color: white;
 
+}
 .edit-btn:hover {
   background-color: #e0a800;
 }
