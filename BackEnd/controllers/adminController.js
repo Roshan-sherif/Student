@@ -80,37 +80,43 @@ resolve(getTeacherDetails)
             const getTeacher=await Teacher.find({},{name:1,_id:1})
             resolve(getTeacher)
         })
-    },
-    createClass:(classData)=>{
-        return new Promise(async(resolve,reject)=>{
-            const teacher= await Teacher.findById(classData.classTeacherID)
-            console.log(teacher)
-            try{
-                if(teacher){
-                    console.log(teacher)
-                    const classTeacherName= teacher.name
-                    const { department, regulation, startYear, endYear, semester, classTeacherId } = classData
-                    const newClasses = new Classes({
-                        department,
-                        regulation,
-                        startYear,
-                        endYear,
-                        semester,
-                        classTeacherName,
-                        classTeacherId,
-                    })
-                        const saveClass= await newClasses.save()
-                        console.log(saveClass)
-                        resolve(saveClass)
+    },createClass: (classData) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const teacher = await Teacher.findById(classData.classTeacherId); 
     
-                }else{
-                    reject({message:'Teacher Not Exist'})
+                if (!teacher) {
+                    return reject({ message: "Teacher Not Exist" });
                 }
-
-            }catch(error){
-                console.log(error)
-                reject(error)
+    
+                const classTeacherName = teacher.name;
+                const { department, regulation, startYear, endYear, semester, classTeacherId } = classData;
+    
+                const newClasses = new Classes({
+                    department,
+                    regulation,
+                    startYear,
+                    endYear,
+                    semester,
+                    classTeacherName,
+                    classTeacherId,
+                });
+    
+                const savedClass = await newClasses.save();
+                console.log("Class Created:", savedClass);
+                resolve(savedClass);
+    
+            } catch (error) {
+                console.error("Error creating class:", error);
+                reject(error);
             }
+        });
+    }
+    ,
+    getClasses:()=>{
+        return new Promise(async(resolve,reject)=>{
+            const responce= await Classes.find()
+            resolve(responce)
         })
     }
 

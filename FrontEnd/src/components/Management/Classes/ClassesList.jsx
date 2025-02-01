@@ -1,30 +1,24 @@
 import React, { useState } from "react";
 import "./ClassesList.css";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 
-const initialClassData = [
-  {
-    id: 1,
-    department: "Computer Science",
-    regulationYear: 2021,
-    startYear: 2021,
-    endYear: 2025,
-    semester: 3,
-    classTeacher: "Mr. Smith",
-  },
-  {
-    id: 2,
-    department: "Information Technology",
-    regulationYear: 2020,
-    startYear: 2020,
-    endYear: 2024,
-    semester: 5,
-    classTeacher: "Ms. Johnson",
-  },
-];
 
 const ClassManagement = () => {
-  const [classData, setClassData] = useState(initialClassData);
+  const [classData, setClassData] = useState([]);
+
+useEffect(()=>{
+  const fetchTeacher=async()=>{
+    const responce=await axios.post('http://localhost:5000/api/admin/get-classes')
+    console.log(responce)
+    if(responce.data.status){
+      setClassData(responce.data.data)
+    }
+  }
+  fetchTeacher()
+})
+
 
   const handleDelete = (id) => {
     const updatedData = classData.filter((cls) => cls.id !== id);
@@ -83,11 +77,11 @@ const ClassManagement = () => {
           {classData.map((cls) => (
             <tr key={cls.id}>
               <td>{cls.department}</td>
-              <td>{cls.regulationYear}</td>
+              <td>{cls.regulation}</td>
               <td>{cls.startYear}</td>
               <td>{cls.endYear}</td>
               <td>{cls.semester}</td>
-              <td>{cls.classTeacher}</td>
+              <td>{cls.classTeacherName}</td>
               <td>
                 <button
                   className="edit-btn"

@@ -86,4 +86,9 @@ router.post('/classes-add',(req,res)=>{
         res.json({status:false, error})
     })
 })
+router.post('/get-classes',(req,res)=>{
+    adminController.getClasses().then((data)=>{
+        res.json({status:true, data})
+    })
+})
 module.exports = router;
