@@ -21,14 +21,22 @@ useEffect(()=>{
 })
 
 
-  const handleDelete = (id) => {
-    const updatedData = classData.filter((cls) => cls.id !== id);
-    setClassData(updatedData);
+  const handleSemInc =async (id) => {
+    const responce=await axios.post(`http://localhost:5000/api/admin/classes-sem-inc/${id}`)
+    console.log(responce)
+    if(responce.data.status){
+      setClassData(responce.data.data)
+    }
 
   };
 
 
-  const handleAdd = () => {
+  const handleDelete =async (id) => {
+    const responce=await axios.post(`http://localhost:5000/api/admin/classes-dlt/${id}`)
+    console.log(responce)
+    if(responce.data.status){
+      setClassData(responce.data.data)
+    }
   };
 
   return (
@@ -64,13 +72,13 @@ useEffect(()=>{
                 </Link>
                 <button
                   className="sem-btn"
-                  onClick={() => handleDelete(cls.id)}
+                  onClick={() => handleSemInc(cls._id)}
                 >
                   SEM+
                 </button>
                 <button
                   className="delete-btn"
-                  onClick={() => handleDelete(cls.id)}
+                  onClick={() => handleDelete(cls._id)}
                 >
                   Delete
                 </button>

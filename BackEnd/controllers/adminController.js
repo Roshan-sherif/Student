@@ -155,6 +155,17 @@ resolve(getTeacherDetails)
             }
 
         })
+    },
+    ClssSemInc:(id)=>{
+        return new Promise(async(resolve,reject)=>{
+            console.log(id)
+            const semInc=await Classes.findByIdAndUpdate(
+                id,
+                {$inc:{semester:1}},
+                {new:true}
+            )
+            resolve()
+        })
     }
 
 };
