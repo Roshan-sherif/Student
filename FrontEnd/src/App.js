@@ -40,6 +40,7 @@ import ClassManagement from './components/Management/Classes/ClassesList';
 import AddClass from './components/Management/Classes/AddTeacher/AddClasses';
 import AdminLoginPage from './components/Management/Login/AdminLogin';
 import TeacherEdit from './components/Management/Teachers/EditTeacher/EditTeacher';
+import EditClass from './components/Management/Classes/EditClass/EditClass';
 console.log(LoginPageTeachers)
 function App() {
     const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 768);
@@ -115,6 +116,8 @@ function App() {
                             <Route path="/admin/Class" element={<ClassManagement/>}/>
                             <Route path="/admin/add-class" element={<AddClass/>} />
                             <Route path="/admin/edit-teacher/:id" element={<TeacherEdit />} />
+                            <Route path="/admin/edit-classes/:clsid/:teachrid" element={<EditClass />} />
+
                    </Routes>
                         </div>
                     </div>

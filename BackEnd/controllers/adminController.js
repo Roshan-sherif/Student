@@ -118,6 +118,43 @@ resolve(getTeacherDetails)
             const responce= await Classes.find()
             resolve(responce)
         })
+    },
+    getClassesAndTeacher:(clsId,teacherID)=>{
+        return new Promise(async(resolve,reject)=>{
+            try{
+                const teacherDtls= await Teacher.find()
+                const classDtls= await Classes.findById(clsId)
+                resolve({teacherDtls,classDtls})
+            }
+            catch(error){
+                reject(error)
+            }
+        })
+
+    },
+    editClass:(id,clsData)=>{
+        return new Promise(async(resolve,reject)=>{
+            try{
+                const teacher = await Teacher.findById(clsData.classTeacherId); 
+    
+                if (!teacher) {
+                    return reject({ message: "Teacher Not Exist" });
+                }
+    
+                const classTeacherName = teacher.name;
+                const { department, regulation, startYear, endYear, semester, classTeacherId } = clsData;
+
+                const updatedClass= await Classes.findByIdAndUpdate(id,
+                    {department, regulation, startYear, endYear, semester,classTeacherName, classTeacherId},
+                    {new:true}
+                )
+                console.log(updatedClass)
+                resolve(updatedClass)
+            }catch(err){
+
+            }
+
+        })
     }
 
 };

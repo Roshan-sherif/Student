@@ -91,4 +91,23 @@ router.post('/get-classes',(req,res)=>{
         res.json({status:true, data})
     })
 })
+router.post('/edit-classes-dtls/:clsid/:teacherid',(req,res)=>{
+    const classId=req.params.clsid
+    const teacherId=req.params.teacherid
+    adminController.getClassesAndTeacher(classId,teacherId).then((data)=>{
+        res.json({status: true, data})
+    }).catch((error)=>{
+        res.json({status:false, error})
+    })
+
+})
+router.post('/edit-classes/:clsid',(req,res)=>{
+    adminController.editClass(req.params.clsid,req.body).then((data)=>{
+        res.json({status: true, data})
+    }).catch((error)=>{
+        res.json({status:false, error})
+    })
+
+})
+
 module.exports = router;

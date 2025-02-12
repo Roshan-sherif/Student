@@ -15,6 +15,7 @@ useEffect(()=>{
     if(responce.data.status){
       setClassData(responce.data.data)
     }
+    console.log(classData)
   }
   fetchTeacher()
 })
@@ -23,36 +24,11 @@ useEffect(()=>{
   const handleDelete = (id) => {
     const updatedData = classData.filter((cls) => cls.id !== id);
     setClassData(updatedData);
+
   };
 
-  const handleEdit = (id) => {
-    const classToEdit = classData.find((cls) => cls.id === id);
-    const newTeacher = prompt(
-      `Edit Class Teacher for ${classToEdit.department}`,
-      classToEdit.classTeacher
-    );
-    if (newTeacher) {
-      setClassData(
-        classData.map((cls) =>
-          cls.id === id ? { ...cls, classTeacher: newTeacher } : cls
-        )
-      );
-    }
-  };
 
   const handleAdd = () => {
-    const newClass = {
-      id: classData.length + 1,
-      department: prompt("Enter Department:", "New Department"),
-      regulationYear: prompt("Enter Regulation Year:", "2023"),
-      startYear: prompt("Enter Start Year:", "2023"),
-      endYear: prompt("Enter End Year:", "2027"),
-      semester: prompt("Enter Semester:", "1"),
-      classTeacher: prompt("Enter Class Teacher:", "New Teacher"),
-    };
-    if (newClass.department && newClass.regulationYear) {
-      setClassData([...classData, newClass]);
-    }
   };
 
   return (
@@ -83,12 +59,9 @@ useEffect(()=>{
               <td>{cls.semester}</td>
               <td>{cls.classTeacherName}</td>
               <td>
-                <button
-                  className="edit-btn"
-                  onClick={() => handleEdit(cls.id)}
-                >
-                  Edit
-                </button>
+              <Link to={`/admin/edit-classes/${cls._id}/${cls.classTeacherId}`}>
+                  <button className="edit-btn">Edit</button>
+                </Link>
                 <button
                   className="sem-btn"
                   onClick={() => handleDelete(cls.id)}
