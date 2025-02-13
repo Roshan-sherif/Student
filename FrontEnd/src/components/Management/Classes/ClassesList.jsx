@@ -3,13 +3,17 @@ import "./ClassesList.css";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import CheckAuth from "../../../hooks/checkAuth";
 
 
 const ClassManagement = () => {
   const [classData, setClassData] = useState([]);
-
+const {user}=CheckAuth()
 useEffect(()=>{
   const fetchTeacher=async()=>{
+    if(!user=='admin'){
+      return null
+    }
     const responce=await axios.post('http://localhost:5000/api/admin/get-classes')
     console.log(responce)
     if(responce.data.status){
@@ -18,7 +22,7 @@ useEffect(()=>{
     console.log(classData)
   }
   fetchTeacher()
-})
+},[])
 
 
   const handleSemInc =async (id) => {

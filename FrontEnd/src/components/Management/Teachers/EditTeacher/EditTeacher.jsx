@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import verifyToken from '../../verifyUser';
+import CheckAuth from '../../../../hooks/checkAuth';
 const TeacherEdit = () => {
   const navigate = useNavigate();
   const { id } = useParams(); 
@@ -12,27 +13,21 @@ const TeacherEdit = () => {
     department: '',
     subject: '',
   });
-
+const {user} = CheckAuth()
   useEffect(() => {
     console.log(id)
     const fetchDashboardData = async () => {
-      const token = localStorage.getItem("token");
-
-      const isTokenValid = await verifyToken(token);
-      if (!isTokenValid) {
-        return navigate('/login/admin');
-      }else{
-       const user= await verifyToken(token)
-if(user){
+if(user!=='admin'){
+  return null
+}
     const getData= await axios.get(`http://localhost:5000/api/admin/get-teacher/${id}`)
     console.log(getData)
     if(getData.data.status){
         setTeacher(getData.data.teacherData)
     }
-}
-    }
+    
 
-    };
+    }
 
     fetchDashboardData();
   }, [navigate]);

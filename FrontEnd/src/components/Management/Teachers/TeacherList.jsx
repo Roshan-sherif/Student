@@ -4,6 +4,7 @@ import './TeacherList.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import CheckAuth from '../../../hooks/checkAuth';
 
 const TeacherListManagement = () => {
 
@@ -19,45 +20,25 @@ if(dlt.data.status){
   setTeacher((prevTeachers) => prevTeachers.filter((teacher) => teacher._id !== id));
 }
   }
-
+const {user}=CheckAuth()
   useEffect(()=>{
      const fetchDashboardData=async()=>{
-      const token=localStorage.getItem("token")
-      console.log(token)
-      if(!token){
-         return navigate('/login/admin')
+      if (!user == 'admin') {
+        return null;
       }else{
-          try {
-        const response= await fetch('http://localhost:5000/api/admin/authverify', {
-          method: 'GET',
-          headers: {
-              Authorization: `${token}`,
-            }
-  
-        })
-        const data = await response.json()
-        if(data.status){
-          const ListTeacher= await axios.get('http://localhost:5000/api/admin/teacher-view')
-          console.log(ListTeacher.data.teacherData)
-          if(ListTeacher.data.status){
-            setTeacher(ListTeacher.data.teacherData)
-          }
-        }else{
-          navigate(`/login/admin`)
-          setDashboardData(response.data)
+        const ListTeacher= await axios.get('http://localhost:5000/api/admin/teacher-view')
+        console.log(ListTeacher.data.teacherData)
+        if(ListTeacher.data.status){
+          setTeacher(ListTeacher.data.teacherData)
         }
-    
-          } 
-          
-          catch (error) {
-              navigate('/login/admin')
-              console.error(error)
-          }
+
       }
       }
       fetchDashboardData(); 
+
+      }
   
-  },[navigate])
+  ,[navigate])
   
   return (
     <div className="table-container">

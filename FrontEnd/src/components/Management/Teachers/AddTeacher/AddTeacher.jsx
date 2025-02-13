@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddTeacher.css';
 import { useNavigate } from 'react-router-dom';
+import CheckAuth from '../../../../hooks/checkAuth';
 
 const AddTeacher = () => {
   const [teacher, setTeacher] = useState({
@@ -14,37 +15,13 @@ const AddTeacher = () => {
   const navigate =useNavigate()
   const [classes, setClasses] = useState([]); 
   const [DashboardData, setDashboardData] =useState()
+  const {user}= CheckAuth()
 useEffect(()=>{
    const fetchDashboardData=async()=>{
-    const token=localStorage.getItem("token")
-    console.log(token)
-    if(!token){
-       return navigate('/login/admin')
-    }else{
-        try {
-      const response= await fetch('http://localhost:5000/api/admin/authverify', {
-        method: 'GET',
-        headers: {
-            Authorization: `${token}`,
-          }
-
-      })
-      const data = await response.json()
-      if(data.status){
-        navigate(`/admin/add-teacher`)
-        setDashboardData(response.data)
-      }else{
-        navigate(`/login/admin`)
-        setDashboardData(response.data)
-      }
-  
-        } 
-        
-        catch (error) {
-            navigate('/login/admin')
-            console.error(error)
-        }
+    if (!user == 'admin') {
+      return null;
     }
+
     }
     fetchDashboardData(); 
 

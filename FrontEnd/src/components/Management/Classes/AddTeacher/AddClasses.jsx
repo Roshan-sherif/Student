@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import CheckAuth from '../../../../hooks/checkAuth';
 
 const AddClass = () => {
   const [teachers, setTeachers] = useState([]); // Initialize state as an empty array
@@ -7,10 +8,12 @@ const AddClass = () => {
   const regulation = [2018,2021];
   const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
   const years = Array.from({ length: 20 }, (_, i) => 2019 + i); 
-
+const {user}=CheckAuth()
   useEffect(() => {
     const fetchTeacher = async () => {
+      if(!user=='admin') return null
       try {
+
         const response = await axios.post(
           'http://localhost:5000/api/admin/classes-teacher-list'
         );

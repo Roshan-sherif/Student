@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import './StudentList.css'; // Import the CSS file
+import CheckAuth from '../../../hooks/checkAuth';
+import { useEffect } from 'react';
 
 // Sample data of students
 const studentData = [
@@ -11,6 +13,17 @@ const studentData = [
 ];
 
 const StudentListManagement = () => {
+
+  const { user } = CheckAuth()
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      if (!user == 'admin') {
+        return null;
+      }
+    }
+    fetchDashboardData();
+  }, [])
+
   return (
     <div className="table-container">
       <h2 className="table-title">Teacher Portal - Student Data</h2>

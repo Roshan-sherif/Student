@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { redirect, useNavigate, useParams } from 'react-router-dom';
+import CheckAuth from '../../../../hooks/checkAuth';
 
 
 const EditClass = () => {
@@ -11,11 +12,13 @@ const EditClass = () => {
   const regulation = [2018,2021];
   const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
   const years = Array.from({ length: 20 }, (_, i) => 2019 + i); 
-
+const {user}=CheckAuth()
   useEffect(() => {
     const fetchTeacher=async()=>{
       const responce=await axios.post(`http://localhost:5000/api/admin/edit-classes-dtls/${clsid}/${teachrid}`)
-
+      if (!user == 'admin') {
+        return null;
+      }
       if(responce.data.status){
         setTeachers(responce.data.data.teacherDtls)
         setFormData(responce.data.data.classDtls)

@@ -29,7 +29,7 @@ try{
 })
 router.get('/authverify',checkAuth, (req,res)=>{
 if(req.user.role==='admin'){
-res.json({status: true, redirect:'/admin/' })
+res.json({status: true, user:'admin', redirect:'/admin/' })
 }else{
     res.json({status: false, redirect:'/login/admin' })
 

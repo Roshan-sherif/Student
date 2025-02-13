@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './AddStudent.css'; // Import the CSS file
+import CheckAuth from '../../../../hooks/checkAuth';
+import { useEffect } from 'react';
 
 const AddStudentFormMangement = () => {
+
+
   const [studentData, setStudentData] = useState({
     reg: "",
     name: "",
@@ -15,6 +19,17 @@ const AddStudentFormMangement = () => {
     contactNumber: "",
     parentNumber: ""
   });
+
+  const { user } = CheckAuth()
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      if (!user == 'admin') {
+        return null;
+      }
+    }
+    fetchDashboardData();
+  }, [])
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
