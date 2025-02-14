@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
 const Teacher = require('../models/Teacher');
-const { get } = require('mongoose');
 const Classes = require('../models/Classes');
-
+const bcrypt =require('bcrypt');
+const ClassesLogin = require('../models/ClassesLogin');
+const saltRounds = 10;
 module.exports = {
 
     adminLogin: async (userData, res) => {
@@ -88,12 +89,15 @@ module.exports = {
                 if (!teacher) {
                     return reject({ message: "Teacher Not Exist" });
                 }
-
+                const hashedPassword = await bcrypt.hash(classData.password, 10);
+                
                 const classTeacherName = teacher.name;
-                const { department, regulation, startYear, endYear, semester, classTeacherId } = classData;
-
+                const classUserId= classData.department+classData.startYear%100+classData.section
+                console.log(classUserId)
+                const { department,section, regulation, startYear, endYear, semester, classTeacherId } = classData;
                 const newClasses = new Classes({
                     department,
+                    section,
                     regulation,
                     startYear,
                     endYear,
@@ -103,8 +107,20 @@ module.exports = {
                 });
 
                 const savedClass = await newClasses.save();
-                console.log("Class Created:", savedClass);
-                resolve(savedClass);
+                const classId=savedClass._id
+                console.log(hashedPassword)
+                if(savedClass){
+                    console.log(classUserId)
+                    const ClassLogin = new ClassesLogin({
+                        classUserId,
+                        password:hashedPassword,
+                        classId
+                    });
+                    const savedClassLogin = await ClassLogin.save();
+
+    
+                }
+                resolve({savedClass});
 
             } catch (error) {
                 console.error("Error creating class:", error);

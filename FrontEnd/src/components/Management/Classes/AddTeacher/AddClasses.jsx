@@ -1,17 +1,24 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import CheckAuth from '../../../../hooks/checkAuth';
+import { Navigate } from 'react-router-dom';
+import { Eye, EyeOff } from "lucide-react";
 
 const AddClass = () => {
   const [teachers, setTeachers] = useState([]); // Initialize state as an empty array
   const departments = ["CSE", "ECE", "EEE", "Mechanical", "Civil"];
+  const section=['A','B','C','D','E']
   const regulation = [2018,2021];
   const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
   const years = Array.from({ length: 20 }, (_, i) => 2019 + i); 
+  const [showPassword, setShowPassword] = useState(false);
+
 const {user}=CheckAuth()
   useEffect(() => {
     const fetchTeacher = async () => {
-      if(!user=='admin') return null
+      if(user!=='admin'){ 
+        return null;
+      }
       try {
 
         const response = await axios.post(
@@ -29,15 +36,17 @@ const {user}=CheckAuth()
       }
     };
     fetchTeacher();
-  }, []);
+  }, [user]);
 
   const [formData, setFormData] = useState({
     department: "",
+    section:"",
     regulation: "",
     startYear: "",
     endYear: "",
     semester: "",
     classTeacherId: "",
+    password:""
   });
 
   const handleChange = (e) => {
@@ -76,6 +85,21 @@ if(response.data.status){
             {departments.map((dept, index) => (
               <option key={index} value={dept}>
                 {dept}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label>Section:</label>
+          <select
+            name="section"
+            value={formData.section}
+            onChange={handleChange}
+          >
+            <option value="">Select Section</option>
+            {section.map((sec, index) => (
+              <option key={index} value={sec}>
+                {sec}
               </option>
             ))}
           </select>
@@ -160,6 +184,18 @@ if(response.data.status){
             ))}
           </select>
         </div>
+        <div className="relative">
+        <label>Password:</label>
+
+      <input
+  type={showPassword ? "text" : "password"}
+  name="password"
+  value={formData.password}  
+  onChange={handleChange}
+      />
+    </div>
+    
+
 
         <button type="submit">Add Class</button>
       </form>

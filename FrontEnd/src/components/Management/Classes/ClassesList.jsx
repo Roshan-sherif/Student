@@ -58,6 +58,7 @@ useEffect(()=>{
         <thead>
           <tr>
             <th>Department</th>
+            <th>Section</th>
             <th>Regulation Year</th>
             <th>Start Year</th>
             <th>End Year</th>
@@ -70,6 +71,7 @@ useEffect(()=>{
           {classData.map((cls) => (
             <tr key={cls.id}>
               <td>{cls.department}</td>
+              <td>{cls.section}</td>
               <td>{cls.regulation}</td>
               <td>{cls.startYear}</td>
               <td>{cls.endYear}</td>

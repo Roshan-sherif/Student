@@ -29,6 +29,7 @@ const {user}=CheckAuth()
 
   const [formData, setFormData] = useState({
     department: "",
+    section:"",
     regulation: "",
     startYear: "",
     endYear: "",
