@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import './StudentList.css'; 
 import CheckAuth from '../../../hooks/checkAuth';
 import { useEffect } from 'react';
@@ -12,12 +12,15 @@ const studentData = [
 ];
 
 const StudentListManagement = () => {
+  const navigate = useNavigate();
 
   const { user } = CheckAuth()
   useEffect(() => {
     const fetchDashboardData = async () => {
-      if (!user == 'admin') {
-        return null;
+      if (!user) return; 
+
+      if (user !== 'admin') {
+        navigate('/login/admin')
       }
     }
     fetchDashboardData();

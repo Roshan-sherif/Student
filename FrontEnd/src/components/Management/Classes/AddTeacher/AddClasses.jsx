@@ -1,23 +1,26 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import CheckAuth from '../../../../hooks/checkAuth';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from "lucide-react";
 
 const AddClass = () => {
-  const [teachers, setTeachers] = useState([]); // Initialize state as an empty array
+  const [teachers, setTeachers] = useState([]); 
   const departments = ["CSE", "ECE", "EEE", "Mechanical", "Civil"];
   const section=['A','B','C','D','E']
   const regulation = [2018,2021];
   const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
   const years = Array.from({ length: 20 }, (_, i) => 2019 + i); 
   const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+  
 
 const {user}=CheckAuth()
   useEffect(() => {
     const fetchTeacher = async () => {
-      if(user!=='admin'){ 
-        return null;
+      if (!user) return; 
+      if (user !== 'admin') {
+        navigate('/login/admin')
       }
       try {
 

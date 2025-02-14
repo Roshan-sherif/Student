@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ClassesList.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import CheckAuth from "../../../hooks/checkAuth";
@@ -9,13 +9,16 @@ import CheckAuth from "../../../hooks/checkAuth";
 const ClassManagement = () => {
   const [classData, setClassData] = useState([]);
   const [semester, setSemester]=useState(1)
+    const navigate = useNavigate();
+  
 const {user}=CheckAuth()
 useEffect(()=>{
   const fetchTeacher=async()=>{
-    if(user!=='admin'){
-      return null
+    if (!user) return; 
+    if (user !== 'admin') {
+      navigate('/login/admin')
     }
-    const responce=await axios.post('http://localhost:5000/api/admin/get-classes')
+  const responce=await axios.post('http://localhost:5000/api/admin/get-classes')
     console.log(responce)
     if(responce.data.status){
       setClassData(responce.data.data)

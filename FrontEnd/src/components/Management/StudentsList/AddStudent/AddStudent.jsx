@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import './AddStudent.css'; // Import the CSS file
 import CheckAuth from '../../../../hooks/checkAuth';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AddStudentFormMangement = () => {
 
-
+  const navigate = useNavigate();
   const [studentData, setStudentData] = useState({
     reg: "",
     name: "",
@@ -23,8 +24,10 @@ const AddStudentFormMangement = () => {
   const { user } = CheckAuth()
   useEffect(() => {
     const fetchDashboardData = async () => {
-      if (!user == 'admin') {
-        return null;
+      if (!user) return; 
+
+      if (user !== 'admin') {
+        navigate('/login/admin')
       }
     }
     fetchDashboardData();

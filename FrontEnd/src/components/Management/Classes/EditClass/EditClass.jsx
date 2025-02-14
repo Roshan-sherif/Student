@@ -16,8 +16,10 @@ const {user}=CheckAuth()
   useEffect(() => {
     const fetchTeacher=async()=>{
       const responce=await axios.post(`http://localhost:5000/api/admin/edit-classes-dtls/${clsid}/${teachrid}`)
-      if (!user == 'admin') {
-        return null;
+      if (!user) return; 
+
+      if (user !== 'admin') {
+        navigate('/login/admin')
       }
       if(responce.data.status){
         setTeachers(responce.data.data.teacherDtls)

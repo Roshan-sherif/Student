@@ -28,12 +28,7 @@ try{
 }
 })
 router.get('/authverify',checkAuth, (req,res)=>{
-if(req.user.role==='admin'){
-res.json({status: true, user:'admin', redirect:'/admin/' })
-}else{
-    res.json({status: false, redirect:'/login/admin' })
-
-}
+res.json({status: true, user:req.user.role , redirect:'/admin/' })
 })
 router.post('/add-teacher',(req,res)=>{
     adminController.addTeacher(req.body).then(()=>{

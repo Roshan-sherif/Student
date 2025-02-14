@@ -17,17 +17,21 @@ const TitleCard = ({ title, text, imageUrl }) => {
 };
 
 const FeatureCard = () => {
-  const [DashboardData, setDashboardData] = useState(null)
+  const [showEmpty, setShowEmpty] = useState(false)
   const navigate = useNavigate()
   const { user } = checkAuth()
   useEffect(() => {
+
     const fetchDashboardData = async () => {
-      if (!user == 'admin') {
-        return null;
+      if (!user) return; 
+
+      console.log(user)
+      if (user !== 'admin') {
+        navigate('/login/admin')
       }
     }
     fetchDashboardData();
-  }, [])
+  }, [user])
 
 
   const ResultOnClick = (title) => {
@@ -53,6 +57,9 @@ const FeatureCard = () => {
     }
 
   ];
+  if(showEmpty){
+    return <div></div>
+  }
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} >

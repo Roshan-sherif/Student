@@ -17,9 +17,11 @@ const {user} = CheckAuth()
   useEffect(() => {
     console.log(id)
     const fetchDashboardData = async () => {
-if(user!=='admin'){
-  return null
-}
+      if (!user) return; 
+
+      if (user !== 'admin') {
+        navigate('/login/admin')
+      }
     const getData= await axios.get(`http://localhost:5000/api/admin/get-teacher/${id}`)
     console.log(getData)
     if(getData.data.status){

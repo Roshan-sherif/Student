@@ -23,9 +23,12 @@ if(dlt.data.status){
 const {user}=CheckAuth()
   useEffect(()=>{
      const fetchDashboardData=async()=>{
-      if (!user == 'admin') {
-        return null;
-      }else{
+      if (!user) return; 
+      if (user !== 'admin') {
+
+        navigate('/login/admin')
+      }
+else{
         const ListTeacher= await axios.get('http://localhost:5000/api/admin/teacher-view')
         console.log(ListTeacher.data.teacherData)
         if(ListTeacher.data.status){

@@ -15,11 +15,13 @@ const AddTeacher = () => {
   const navigate =useNavigate()
   const [classes, setClasses] = useState([]); 
   const [DashboardData, setDashboardData] =useState()
+  
   const {user}= CheckAuth()
 useEffect(()=>{
    const fetchDashboardData=async()=>{
-    if (!user == 'admin') {
-      return null;
+    if (!user) return; 
+    if (user !== 'admin') {
+      navigate('/login/admin')
     }
 
     }
