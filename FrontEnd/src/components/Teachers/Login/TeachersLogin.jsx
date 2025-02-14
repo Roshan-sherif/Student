@@ -1,13 +1,14 @@
-// Importing React
 import React, { useState } from "react";
 
-// Importing CSS for Teacher's login
 import "./TeachersLogin.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-// Teachers Login Page Component
 const TeacherLoginPage = () => {
     const [userId,setUserId]=useState('')
     const [password,setPassword]=useState('')
+    const[error,setError]=useState('')
+    const navigate=useNavigate()
     console.log(userId)
 const handleSubmit=async(e)=>{
     e.preventDefault();
@@ -16,6 +17,15 @@ const handleSubmit=async(e)=>{
         userId,
         password,
     }
+    const responce=await axios.post('http://localhost:5000/api/teacher/login',loginData)
+console.log(responce)
+if(responce.data.status){
+    localStorage.setItem("token",responce.data.token)
+    navigate('/teachers')
+
+}else{
+    setError(responce.data.err.msg)
+}
 } 
     return (
         <div className="teacher-login-container">
@@ -47,6 +57,7 @@ const handleSubmit=async(e)=>{
                         required 
                     />
                 </div>
+                <h6 className="error">{error}</h6>
 
                 <button type="submit" className="teacher-login-btn">Login</button>
             </form>
