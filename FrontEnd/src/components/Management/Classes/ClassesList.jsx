@@ -8,10 +8,11 @@ import CheckAuth from "../../../hooks/checkAuth";
 
 const ClassManagement = () => {
   const [classData, setClassData] = useState([]);
+  const [semester, setSemester]=useState(1)
 const {user}=CheckAuth()
 useEffect(()=>{
   const fetchTeacher=async()=>{
-    if(!user=='admin'){
+    if(user!=='admin'){
       return null
     }
     const responce=await axios.post('http://localhost:5000/api/admin/get-classes')
@@ -22,15 +23,19 @@ useEffect(()=>{
     console.log(classData)
   }
   fetchTeacher()
-},[])
+},[user])
 
 
   const handleSemInc =async (id) => {
     const responce=await axios.post(`http://localhost:5000/api/admin/classes-sem-inc/${id}`)
     console.log(responce)
     if(responce.data.status){
-      setClassData(responce.data.data)
-    }
+      setClassData((prevClassData) =>
+        prevClassData.map((cls) =>
+          cls._id === id ? { ...cls, semester: cls.semester + 1 } : cls
+        )
+      );
+          }
 
   };
 
@@ -39,9 +44,9 @@ useEffect(()=>{
     const responce=await axios.post(`http://localhost:5000/api/admin/classes-dlt/${id}`)
     console.log(responce)
     if(responce.data.status){
-      setClassData(responce.data.data)
+      setClassData((prevClassData) => prevClassData.filter((semester) => semester._id !== id));
     }
-  };
+      };
 
   return (
     <div className="class-management-container">

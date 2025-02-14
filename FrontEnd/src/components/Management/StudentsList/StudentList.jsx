@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import './StudentList.css'; // Import the CSS file
+import { Link } from 'react-router-dom'; 
+import './StudentList.css'; 
 import CheckAuth from '../../../hooks/checkAuth';
 import { useEffect } from 'react';
 
-// Sample data of students
 const studentData = [
   { register: "S001", name: "Alice Johnson",Dep:"CSE", gender: "Female", feesDue: "$200", attendance: "95%", arrears: 0 },
   { register: "S002", name: "Bob Smith",Dep:"CSE", gender: "Male", feesDue: "$150", attendance: "90%", arrears: 1 },

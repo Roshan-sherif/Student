@@ -51,47 +51,47 @@ module.exports = {
             }
         })
     },
-    getTeacher:()=>{
-        return new Promise(async(resolve,reject)=>{
-            const viewTeacher=await Teacher.find()
-resolve(viewTeacher)        
-})
-    },
-    getTeacherforEdit:(id)=>{
-        return new Promise(async(resolve,reject)=>{
-            const getTeacherDetails=await Teacher.findById(id)
-resolve(getTeacherDetails)
+    getTeacher: () => {
+        return new Promise(async (resolve, reject) => {
+            const viewTeacher = await Teacher.find()
+            resolve(viewTeacher)
         })
     },
-    editTeacher:(teacherData,id)=>{
-        return new Promise(async(resolve,reject)=>{
-            const teacherEdit =await Teacher.findByIdAndUpdate(id,teacherData,{new:true})
+    getTeacherforEdit: (id) => {
+        return new Promise(async (resolve, reject) => {
+            const getTeacherDetails = await Teacher.findById(id)
+            resolve(getTeacherDetails)
+        })
+    },
+    editTeacher: (teacherData, id) => {
+        return new Promise(async (resolve, reject) => {
+            const teacherEdit = await Teacher.findByIdAndUpdate(id, teacherData, { new: true })
             resolve(teacherEdit)
         })
     },
-    dltTeacher:(teacherId)=>{
-        return new Promise(async(resolve,reject)=>{
-            const dlt=await Teacher.deleteOne({_id:teacherId})
+    dltTeacher: (teacherId) => {
+        return new Promise(async (resolve, reject) => {
+            const dlt = await Teacher.deleteOne({ _id: teacherId })
             resolve(dlt)
         })
     },
-    getTeacherforAddClasses:()=>{
-        return new Promise(async(resolve,reject)=>{
-            const getTeacher=await Teacher.find({},{name:1,_id:1})
+    getTeacherforAddClasses: () => {
+        return new Promise(async (resolve, reject) => {
+            const getTeacher = await Teacher.find({}, { name: 1, _id: 1 })
             resolve(getTeacher)
         })
-    },createClass: (classData) => {
+    }, createClass: (classData) => {
         return new Promise(async (resolve, reject) => {
             try {
-                const teacher = await Teacher.findById(classData.classTeacherId); 
-    
+                const teacher = await Teacher.findById(classData.classTeacherId);
+
                 if (!teacher) {
                     return reject({ message: "Teacher Not Exist" });
                 }
-    
+
                 const classTeacherName = teacher.name;
                 const { department, regulation, startYear, endYear, semester, classTeacherId } = classData;
-    
+
                 const newClasses = new Classes({
                     department,
                     regulation,
@@ -101,11 +101,11 @@ resolve(getTeacherDetails)
                     classTeacherName,
                     classTeacherId,
                 });
-    
+
                 const savedClass = await newClasses.save();
                 console.log("Class Created:", savedClass);
                 resolve(savedClass);
-    
+
             } catch (error) {
                 console.error("Error creating class:", error);
                 reject(error);
@@ -113,59 +113,70 @@ resolve(getTeacherDetails)
         });
     }
     ,
-    getClasses:()=>{
-        return new Promise(async(resolve,reject)=>{
-            const responce= await Classes.find()
+    getClasses: () => {
+        return new Promise(async (resolve, reject) => {
+            const responce = await Classes.find()
             resolve(responce)
         })
     },
-    getClassesAndTeacher:(clsId,teacherID)=>{
-        return new Promise(async(resolve,reject)=>{
-            try{
-                const teacherDtls= await Teacher.find()
-                const classDtls= await Classes.findById(clsId)
-                resolve({teacherDtls,classDtls})
+    getClassesAndTeacher: (clsId, teacherID) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const teacherDtls = await Teacher.find()
+                const classDtls = await Classes.findById(clsId)
+                resolve({ teacherDtls, classDtls })
             }
-            catch(error){
+            catch (error) {
                 reject(error)
             }
         })
 
     },
-    editClass:(id,clsData)=>{
-        return new Promise(async(resolve,reject)=>{
-            try{
-                const teacher = await Teacher.findById(clsData.classTeacherId); 
-    
+    editClass: (id, clsData) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const teacher = await Teacher.findById(clsData.classTeacherId);
+
                 if (!teacher) {
                     return reject({ message: "Teacher Not Exist" });
                 }
-    
+
                 const classTeacherName = teacher.name;
                 const { department, regulation, startYear, endYear, semester, classTeacherId } = clsData;
 
-                const updatedClass= await Classes.findByIdAndUpdate(id,
-                    {department, regulation, startYear, endYear, semester,classTeacherName, classTeacherId},
-                    {new:true}
+                const updatedClass = await Classes.findByIdAndUpdate(id,
+                    { department, regulation, startYear, endYear, semester, classTeacherName, classTeacherId },
+                    { new: true }
                 )
                 console.log(updatedClass)
                 resolve(updatedClass)
-            }catch(err){
+            } catch (err) {
 
             }
 
         })
     },
-    ClssSemInc:(id)=>{
-        return new Promise(async(resolve,reject)=>{
+    ClssSemInc: (id) => {
+        return new Promise(async (resolve, reject) => {
             console.log(id)
-            const semInc=await Classes.findByIdAndUpdate(
+            const semInc = await Classes.findByIdAndUpdate(
                 id,
-                {$inc:{semester:1}},
-                {new:true}
+                { $inc: { semester: 1 } },
+                { new: true }
             )
-            resolve()
+            console.log(semInc.semester)
+            resolve(semInc.semester)
         })
-    }
+    },
+    clssDlt: (id) => {
+        {
+            return new Promise(async (resolve, reject) => {
+                console.log(id)
+                const dlt = await Classes.deleteOne({_id:id})
+                resolve(dlt)
+            })
+        }
 
-};
+
+    }
+}

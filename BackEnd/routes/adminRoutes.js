@@ -111,8 +111,13 @@ router.post('/edit-classes/:clsid',(req,res)=>{
 })
 router.post('/classes-sem-inc/:clsid',(req,res)=>{
     console.log(req.body)
-    adminController.ClssSemInc(req.params.clsid).then(()=>{
-
+    adminController.ClssSemInc(req.params.clsid).then((sem)=>{
+res.json({status:true, semester:sem})
+    })
+})
+router.post('/classes-dlt/:id',(req,res)=>{
+    adminController.clssDlt(req.params.id).then(()=>{
+        res.json({status:true})
     })
 })
 
