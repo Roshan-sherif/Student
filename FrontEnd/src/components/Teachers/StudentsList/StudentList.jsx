@@ -18,6 +18,8 @@ const studentData = [
 
 
 const TeacherPortalTable = () => {
+
+  
   const navigate=useNavigate()
   const {user}=CheckAuth()
   

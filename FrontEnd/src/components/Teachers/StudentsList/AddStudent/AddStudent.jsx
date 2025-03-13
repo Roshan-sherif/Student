@@ -4,7 +4,12 @@ import CheckAuth from '../../../../hooks/checkAuth';
 import { useNavigate } from 'react-router-dom';
 
 const AddStudentForm = () => {
-  
+  const departments = ["CSE", "ECE", "EEE", "Mechanical", "Civil"];
+  const section=['A','B','C','D','E']
+  const regulation = [2018,2021];
+  const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
+  const years = Array.from({ length: 20 }, (_, i) => 2019 + i); 
+
   const {user}=CheckAuth()
   const navigate=useNavigate()
   const [studentData, setStudentData] = useState({
@@ -45,7 +50,6 @@ const AddStudentForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here, you would typically handle sending the data to the server
     console.log("Student Data Submitted:", studentData);
   };
 
@@ -76,41 +80,113 @@ const AddStudentForm = () => {
             required
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="gender">Gender:</label>
+          <select
+            id="gender"
+            name="gender"
+            value={studentData.gender}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
 
         <div className="form-group">
           <label htmlFor="department">Department:</label>
-          <input
+          <select
             type="text"
             id="department"
             name="department"
             value={studentData.department}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select Gender</option>
+            <option value="GENERAL">GENERAL</option>
+            <option value="CSE">CSE</option>
+            <option value="AIDS">AIDS</option>
+            <option value="CYBER SECURITY">CYBER SECURITY</option>
+            <option value="FOOD AND TECH">FOOD AND TECH</option>
+            <option value="AGRICULTURE">AGRICULTURE</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="MECH">MECH</option>
+            <option value="EEE">EEE</option>
+            <option value="ECE">ECE</option>
+            <option value="BIO TECH">BIO TECH</option>
+          </select>
         </div>
 
+
         <div className="form-group">
-          <label htmlFor="year">Year:</label>
-          <input
-            type="text"
+          <label htmlFor="year">Regualation Year:</label>
+          <select
             id="year"
             name="year"
             value={studentData.year}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select Regulation Year</option>
+            <option value="2018">2018</option>
+            <option value="2021">2021</option>
+
+          </select>
         </div>
+
+        <div>
+          <label>Start Year:</label>
+          <select
+            name="regulation"
+            value={studentData.regulation}
+            onChange={handleChange}
+          >
+            <option value="Select Start Year">Select Start Year</option>
+            {years.map((year, index) => (
+              <option key={index} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label>End Year:</label>
+          <select
+            name="regulation"
+            value={studentData.regulation}
+            onChange={handleChange}
+          >
+            <option value="Select End Year">Select End Year</option>
+            {years.map((year, index) => (
+              <option key={index} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
+
+
 
         <div className="form-group">
           <label htmlFor="section">Section:</label>
-          <input
-            type="text"
+          <select
             id="section"
             name="section"
             value={studentData.section}
             onChange={handleChange}
             required
-          />
+          >
+                        <option value="">Select Section</option>
+            {section.map((sec, index) => (
+              <option key={index} value={sec}>
+                {sec}
+              </option>
+            ))}
+</select>
         </div>
 
         <div className="form-group">
@@ -174,11 +250,11 @@ const AddStudentForm = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="parentNumber">Parent Number:</label>
+          <label htmlFor="parentNumber">Image:</label>
           <input
-            type="text"
-            id="parentNumber"
-            name="parentNumber"
+            type="file"
+            id="image"
+            name="image"
             value={studentData.parentNumber}
             onChange={handleChange}
             required
