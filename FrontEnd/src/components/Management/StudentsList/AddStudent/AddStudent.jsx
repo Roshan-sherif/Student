@@ -31,7 +31,7 @@ const AddStudentFormMangement = () => {
       }
     }
     fetchDashboardData();
-  }, [])
+  }, [user])
 
 
   const handleChange = (e) => {

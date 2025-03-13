@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './CIA2_Entry.css';
+import CheckAuth from '../../../../hooks/checkAuth';
+import { useNavigate } from 'react-router-dom';
 
 // Sample student data
 const students = [
@@ -21,7 +23,8 @@ const CIA2ENTRY = () => {
   );
 
   const [editMode, setEditMode] = useState(false);
-
+const {user}=CheckAuth()
+const navigate=useNavigate()
   useEffect(() => {
     // Load saved marks from localStorage when the component mounts
     const savedMarks = JSON.parse(localStorage.getItem('marks'));
@@ -29,7 +32,17 @@ const CIA2ENTRY = () => {
       setMarks(savedMarks);
       setEditMode(true);
     }
-  }, []);
+    const fetchDashboardData = async () => {
+      if (!user) return; 
+  
+      console.log(user)
+      if (user !== 'teacher') {
+  navigate('/login/teachers')
+      }
+    }
+    fetchDashboardData();
+  
+  }, [user]);
 
   const handleMarkChange = (studentId, subject, value) => {
     setMarks((prev) =>

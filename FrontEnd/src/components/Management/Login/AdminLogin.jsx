@@ -30,9 +30,9 @@ const handleSubmit=async(e)=>{
             localStorage.setItem("token",data.token)
             navigate(data.redirect)
           }else{
-
               }
               }catch(err){
+                console.log(err)
         console.log('Invalid username or password')
     }
 } 

@@ -5,6 +5,7 @@ const checkAuth =require('../middleware/authMiddleware');
 const { redirect } = require('react-router-dom');
 router.post('/login', async(req,res)=>{
     const LoginData = req.body.loginData
+    console.log('DFDF')
 
 try{
    const responce =await adminController.adminLogin(LoginData)

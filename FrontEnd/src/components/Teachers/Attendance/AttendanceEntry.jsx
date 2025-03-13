@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './AttendanceEntry.css';
+import CheckAuth from '../../../hooks/checkAuth';
+import { useNavigate } from 'react-router-dom';
 
 // Sample data for students
 const students = [
@@ -10,6 +12,8 @@ const students = [
 ];
 
 const TeacherAttendanceEntry = () => {
+  const {user}=CheckAuth()
+  const navigate=useNavigate()
   const [date, setDate] = useState("");
   const [attendance, setAttendance] = useState(
     students.map((student) => ({
@@ -22,8 +26,18 @@ const TeacherAttendanceEntry = () => {
   const [totalWorkingDays, setTotalWorkingDays] = useState(0);
 
   useEffect(() => {
+    const fetchDashboardData = async () => {
+      if (!user) return; 
+  
+      console.log(user)
+      if (user !== 'teacher') {
+  navigate('/login/teachers')
+      }
+    }
+    fetchDashboardData();
+  
     calculateTotalWorkingDays();
-  }, []);
+  }, [user]);
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;

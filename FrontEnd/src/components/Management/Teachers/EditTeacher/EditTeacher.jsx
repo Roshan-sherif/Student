@@ -32,7 +32,7 @@ const {user} = CheckAuth()
     }
 
     fetchDashboardData();
-  }, [navigate]);
+  }, [navigate,user]);
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setTeacher({

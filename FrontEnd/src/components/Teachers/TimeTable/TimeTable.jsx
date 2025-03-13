@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './TimeTable.css';
+import { useNavigate } from 'react-router-dom';
+import CheckAuth from '../../../hooks/checkAuth';
 
 const TeacherTimetable = () => {
   // Sample timetable data for the teacher (this data could come from an API or database)
@@ -12,12 +14,19 @@ const TeacherTimetable = () => {
   };
 
   const [timetable, setTimetable] = useState(initialTimetable);
-
+const navigate=useNavigate()
+const {user}=CheckAuth()
   useEffect(() => {
-    // In a real-world app, you could fetch this data from an API or localStorage
-    // For this example, it's hardcoded.
-    // setTimetable(fetchedTimetableData);
-  }, []);
+    const fetchDashboardData = async () => {
+      if (!user) return; 
+  
+      console.log(user)
+      if (user !== 'teacher') {
+  navigate('/login/teachers')
+      }
+    }
+    fetchDashboardData();
+    }, [user]);
 
   return (
     <div className="teacher-timetable-container">

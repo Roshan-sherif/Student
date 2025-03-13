@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddStudent.css'; // Import the CSS file
+import CheckAuth from '../../../../hooks/checkAuth';
+import { useNavigate } from 'react-router-dom';
 
 const AddStudentForm = () => {
+  
+  const {user}=CheckAuth()
+  const navigate=useNavigate()
   const [studentData, setStudentData] = useState({
     reg: "",
     name: "",
@@ -15,6 +20,20 @@ const AddStudentForm = () => {
     contactNumber: "",
     parentNumber: ""
   });
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      if (!user) return; 
+  
+      console.log(user)
+      if (user !== 'teacher') {
+  navigate('/login/teachers')
+      }
+    }
+    fetchDashboardData();
+    }, [user]);
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;

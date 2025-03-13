@@ -16,7 +16,9 @@ const StudentListManagement = () => {
 
   const { user } = CheckAuth()
   useEffect(() => {
+    
     const fetchDashboardData = async () => {
+    console.log("hhh"+user)
       if (!user) return; 
 
       if (user !== 'admin') {
@@ -24,7 +26,7 @@ const StudentListManagement = () => {
       }
     }
     fetchDashboardData();
-  }, [])
+  }, [user])
 
   return (
     <div className="table-container">

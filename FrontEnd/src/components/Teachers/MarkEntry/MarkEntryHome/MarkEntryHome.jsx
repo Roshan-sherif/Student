@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './MarkEntryHome.css'; // Import the CSS file
+import CheckAuth from '../../../../hooks/checkAuth';
 
 // TitleCard component
 const TitleCard = ({ title, text, imageUrl }) => {
@@ -18,7 +19,19 @@ const ResultOnClick=()=>{
 }
 // Result component
 const MarkEntryHome = () => {
-
+    const {user}=CheckAuth()
+useEffect(()=>{
+    const fetchDashboardData = async () => {
+        if (!user) return; 
+    
+        console.log(user)
+        if (user !== 'teacher') {
+    navigate('/login/teachers')
+        }
+      }
+      fetchDashboardData();
+    
+},[user])
     const navigate =useNavigate()
 
     const ResultOnClick=(title)=>{

@@ -41,7 +41,7 @@ else{
 
       }
   
-  ,[navigate])
+  ,[navigate,user])
   
   return (
     <div className="table-container">

@@ -27,7 +27,7 @@ const {user}=CheckAuth()
       }
     }
     fetchTeacher()
-      },[clsid,teachrid]);
+      },[clsid,teachrid,user]);
 
   const [formData, setFormData] = useState({
     department: "",

@@ -8,6 +8,8 @@ module.exports = {
 
     adminLogin: async (userData, res) => {
         const jwtSecret = process.env.JWT_KEY
+        console.log(process.env.JWT_KEY)
+
         try {
             const ADMIN_CREDENTIALS = {
                 userId: process.env.ADMIN_USERID,
