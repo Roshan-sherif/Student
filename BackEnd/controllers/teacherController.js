@@ -1,3 +1,4 @@
+const Classes = require("../models/Classes");
 const ClassesLogin = require("../models/ClassesLogin")
 const bcrypt = require('bcrypt');
 
@@ -26,6 +27,13 @@ module.exports = {
                 reject({status:false, msg:err})
             }
 
+        })
+    },
+    fetchClass:(classId)=>{
+        return new Promise(async(resolve,reject)=>{
+            const responce=await Classes.findOne(classId.classId)
+            console.log(responce)
+            resolve(responce)
         })
     }
 }

@@ -2,16 +2,24 @@ import React, { useEffect, useState } from 'react';
 import './AddStudent.css'; // Import the CSS file
 import CheckAuth from '../../../../hooks/checkAuth';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+
+
+
 
 const AddStudentForm = () => {
-  const departments = ["CSE", "ECE", "EEE", "Mechanical", "Civil"];
-  const section=['A','B','C','D','E']
-  const regulation = [2018,2021];
+  const section = ['A', 'B', 'C', 'D', 'E']
+  const regulation = [2018, 2021];
   const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
-  const years = Array.from({ length: 20 }, (_, i) => 2019 + i); 
+  const years = Array.from({ length: 20 }, (_, i) => 2019 + i);
+  const jwtToken = localStorage.getItem('token');
 
-  const {user}=CheckAuth()
-  const navigate=useNavigate()
+
+
+  const { user } = CheckAuth()
+  const navigate = useNavigate()
   const [studentData, setStudentData] = useState({
     reg: "",
     name: "",
@@ -25,18 +33,60 @@ const AddStudentForm = () => {
     contactNumber: "",
     parentNumber: ""
   });
+  const [classdtls, setClassdtls] = useState({
+    department: "",
+    section: "",
+    regulation: "",
+    startYear: "",
+    endYear: "",
+    semester: "",
+
+  })
+
 
   useEffect(() => {
     const fetchDashboardData = async () => {
-      if (!user) return; 
-  
+      if (!user) return;
+
       console.log(user)
       if (user !== 'teacher') {
-  navigate('/login/teachers')
+        navigate('/login/teachers')
+      }
+      if (jwtToken) {
+        const decodedToken = jwtDecode(jwtToken);
+        console.log(decodedToken);
+        const classid = decodedToken.classId
+        console.log(classid)
+        const responce = await axios.post('http://localhost:5000/api/teacher/fetch-class', { classid })
+        if (responce) {
+          const data = responce.data.data
+          setClassdtls({
+            department: data.department,
+            section: data.section,
+            regulation: data.regulation,
+            startYear: data.startYear,
+            endYear: data.endYear,
+            semester: data.semester,
+
+          })
+          setStudentData((prevData)=>({
+            ...prevData,
+            department: data.department,
+            section: data.section,
+            regulation: data.regulation,
+            startYear: data.startYear,
+            endYear: data.endYear,
+            semester: data.semester,
+        }))
+        
+          console.log(studentData)
+        }
+
       }
     }
     fetchDashboardData();
-    }, [user]);
+  }, [user]);
+
 
 
 
@@ -48,9 +98,14 @@ const AddStudentForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Student Data Submitted:", studentData);
+    try {
+      const responce = await axios.post('http://localhost:5000/api/teacher/add-students')
+
+      console.log(responce)
+    } catch (err) { }
   };
 
   return (
@@ -97,96 +152,69 @@ const AddStudentForm = () => {
 
         <div className="form-group">
           <label htmlFor="department">Department:</label>
-          <select
+          <input
             type="text"
             id="department"
             name="department"
             value={studentData.department}
             onChange={handleChange}
             required
+            readOnly
           >
-            <option value="">Select Gender</option>
-            <option value="GENERAL">GENERAL</option>
-            <option value="CSE">CSE</option>
-            <option value="AIDS">AIDS</option>
-            <option value="CYBER SECURITY">CYBER SECURITY</option>
-            <option value="FOOD AND TECH">FOOD AND TECH</option>
-            <option value="AGRICULTURE">AGRICULTURE</option>
-            <option value="CIVIL">CIVIL</option>
-            <option value="MECH">MECH</option>
-            <option value="EEE">EEE</option>
-            <option value="ECE">ECE</option>
-            <option value="BIO TECH">BIO TECH</option>
-          </select>
+          </input>
         </div>
 
 
         <div className="form-group">
           <label htmlFor="year">Regualation Year:</label>
-          <select
+          <input
             id="year"
             name="year"
-            value={studentData.year}
+            value={studentData.regulation}
             onChange={handleChange}
             required
+            readOnly
           >
-            <option value="">Select Regulation Year</option>
-            <option value="2018">2018</option>
-            <option value="2021">2021</option>
-
-          </select>
+          </input>
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Start Year:</label>
-          <select
+          <input
             name="regulation"
-            value={studentData.regulation}
+            value={studentData.startYear}
             onChange={handleChange}
+            readOnly
+            required
           >
-            <option value="Select Start Year">Select Start Year</option>
-            {years.map((year, index) => (
-              <option key={index} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
+          </input>
         </div>
 
-        <div>
+        <div className="form-group">
           <label>End Year:</label>
-          <select
+          <input
             name="regulation"
-            value={studentData.regulation}
+            value={studentData.endYear}
             onChange={handleChange}
+            readOnly
           >
-            <option value="Select End Year">Select End Year</option>
-            {years.map((year, index) => (
-              <option key={index} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
+
+          </input>
         </div>
 
 
 
         <div className="form-group">
           <label htmlFor="section">Section:</label>
-          <select
+          <input
             id="section"
             name="section"
             value={studentData.section}
             onChange={handleChange}
             required
+            readOnly
           >
-                        <option value="">Select Section</option>
-            {section.map((sec, index) => (
-              <option key={index} value={sec}>
-                {sec}
-              </option>
-            ))}
-</select>
+          </input>
         </div>
 
         <div className="form-group">
@@ -249,7 +277,7 @@ const AddStudentForm = () => {
           />
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="parentNumber">Image:</label>
           <input
             type="file"
@@ -259,7 +287,7 @@ const AddStudentForm = () => {
             onChange={handleChange}
             required
           />
-        </div>
+        </div> */}
 
         <button type="submit" className="submit-button">Add Student</button>
       </form>

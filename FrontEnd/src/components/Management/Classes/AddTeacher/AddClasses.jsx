@@ -13,7 +13,6 @@ const AddClass = () => {
   const years = Array.from({ length: 20 }, (_, i) => 2019 + i); 
   const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-  
 
 const {user}=CheckAuth()
   useEffect(() => {
@@ -51,7 +50,6 @@ const {user}=CheckAuth()
     classTeacherId: "",
     password:""
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({

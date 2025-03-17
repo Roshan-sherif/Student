@@ -48,7 +48,7 @@ useEffect(()=>{
     });
   
     try{
-      const responseAddTeacher= await axios.post('http://localhost:5000/api/admin/add-teacher',teacher,{
+      const responseAddTeacher= await axios.post('http://localhost:5000/api/admin/            ',teacher,{
         headers: {
           'Content-Type': 'application/json',
         },

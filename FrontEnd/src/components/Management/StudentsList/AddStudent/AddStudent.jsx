@@ -44,8 +44,6 @@ const AddStudentFormMangement = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here, you would typically handle sending the data to the server
-    console.log("Student Data Submitted:", studentData);
   };
 
   return (
