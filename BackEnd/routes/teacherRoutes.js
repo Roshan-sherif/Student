@@ -21,7 +21,9 @@ res.json({status:false, err})
 })
 })
 router.post('/add-students',(req,res)=>{
-    console.log('hello')
+    console.log(req.body)
+    teacherController.addStudent(req.body)  
+
 })
 router.post('/fetch-class',(req,res)=>{
     console.log(req.body)

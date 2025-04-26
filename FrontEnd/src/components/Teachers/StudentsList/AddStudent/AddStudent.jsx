@@ -24,7 +24,6 @@ const AddStudentForm = () => {
     reg: "",
     name: "",
     department: "",
-    year: "",
     section: "",
     address: "",
     bloodGroup: "",
@@ -67,6 +66,7 @@ const AddStudentForm = () => {
             startYear: data.startYear,
             endYear: data.endYear,
             semester: data.semester,
+            classid:classid
 
           })
           setStudentData((prevData)=>({
@@ -77,6 +77,8 @@ const AddStudentForm = () => {
             startYear: data.startYear,
             endYear: data.endYear,
             semester: data.semester,
+            classid:classid
+
         }))
         
           console.log(studentData)
@@ -102,7 +104,7 @@ const AddStudentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const responce = await axios.post('http://localhost:5000/api/teacher/add-students')
+      const responce = await axios.post('http://localhost:5000/api/teacher/add-students',{studentData} )
 
       console.log(responce)
     } catch (err) { }
@@ -276,6 +278,18 @@ const AddStudentForm = () => {
             required
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="contactNumber">Parent Contact Number:</label>
+          <input
+            type="text"
+            id="parentNumber"
+            name="parentNumber"
+            value={studentData.parentNumber}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
 
         {/* <div className="form-group">
           <label htmlFor="parentNumber">Image:</label>
